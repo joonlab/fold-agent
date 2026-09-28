@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="shot" content="w=1600,h=1000,scale=2">
+<title>폴드 에이전트 — 구성</title>
+<link rel="stylesheet" href="https://mockup-kit.invalid/kit.css">
+<script src="https://mockup-kit.invalid/kit.js"></script>
+<link rel="stylesheet" href="_app.css">
+<style>
+  .layout { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 34px; }
+  .mac-col { width: 420px; display: flex; flex-direction: column; }
+  .conv .list-row .meta { font-size: 12px; }
+  .pane.room { display: flex; flex-direction: column; gap: 10px; }
+</style>
+</head><body>
+<div class="canvas app-foldagent">
+  <div class="layout">
+
+    <!-- 펼친 화면: 대시보드(대화 목록 + 대화방) -->
+    <div>
+      <div class="fold-open" style="--zoom:.76">
+        <div class="screen">
+          <div class="status-bar" data-time="7:42"></div>
+          <div class="app-bar">
+            <img class="mark" data-app="foldagent" alt="">
+            <span class="title">폴드 에이전트</span>
+            <span class="status"><span class="dot ok"></span>준비됨</span>
+            <span class="spacer"></span>
+            <span class="icon-btn"><i data-icon="search"></i></span>
+            <span class="icon-btn"><i data-icon="settings"></i></span>
+          </div>
+          <div class="two-pane list-detail">
+            <div class="pane conv">
+              <div class="chips"><span class="chip on">대화</span><span class="chip">보관</span><span class="chip">휴지통</span></div>
+              <div class="section-label">오늘</div>
+              <div class="list">
+                <div class="list-row selected"><i class="ico" data-icon="list-checks"></i><div class="grow"><div class="card-title ellipsis">장보기 목록 노트로 정리</div><div class="meta ellipsis">6단계 · 오전 7:40</div></div></div>
+                <div class="list-row"><i class="ico" data-icon="clock"></i><div class="grow"><div class="card-title ellipsis">내일 7시 알람</div><div class="meta ellipsis">1단계 · 오전 7:31</div></div></div>
+                <div class="list-row"><i class="ico" data-icon="map-pin"></i><div class="grow"><div class="card-title ellipsis">집에서 회사까지 경로</div><div class="meta ellipsis">5단계 · 오전 7:12</div></div></div>
+              </div>
+              <div class="section-label">어제</div>
+              <div class="list">
+                <div class="list-row"><i class="ico" data-icon="battery"></i><div class="grow"><div class="card-title ellipsis">배터리 잔량 확인</div><div class="meta ellipsis">1단계 · 오후 10:05</div></div></div>
+                <div class="list-row"><i class="ico" data-icon="image"></i><div class="grow"><div class="card-title ellipsis">회의 메모 사진 공유</div><div class="meta ellipsis">4단계 · 오후 6:47</div></div></div>
+              </div>
+            </div>
+            <div class="pane room">
+              <div class="row"><span class="tag accent">완료</span><span class="meta">6단계 · 21초</span></div>
+              <div class="chat">
+                <div class="msg me">메시지 앱에서 민지가 보낸 장보기 목록을 노트로 정리해 줘</div>
+                <div class="steps">
+                  <div class="step"><span class="n">1</span><span><b>open_app</b> 메시지</span></div>
+                  <div class="step"><span class="n">2</span><span><b>tap</b> 민지 대화방</span></div>
+                  <div class="step"><span class="n">3</span><span><b>read</b> 마지막 메시지 5줄</span></div>
+                  <div class="step"><span class="n">4</span><span><b>write_note</b> 「장보기 목록」 새 노트</span></div>
+                  <div class="step"><span class="n">5</span><span><b>look</b> 노트 저장 확인</span></div>
+                  <div class="step"><span class="n">6</span><span><b>finish</b></span></div>
+                </div>
+                <div class="msg">「장보기 목록」 노트를 만들었어요. 우유, 달걀, 두부, 대파, 사과 5개 품목이에요.</div>
+              </div>
+            </div>
+          </div>
+          <div class="input-bar">
+            <div class="input placeholder">말하거나 입력하세요…</div>
+            <span class="send-btn"><i data-icon="mic"></i></span>
+          </div>
+          <div class="nav-handle"></div>
+        </div>
+      </div>
+      <div class="device-label">펼친 화면 — 대화 기록과 단계</div>
+    </div>
+
+    <!-- 커버: 다른 앱 위에서 일하는 중 -->
+    <div>
+      <div class="fold-cover" style="--zoom:.76">
+        <div class="screen">
+          <div class="status-bar" data-time="7:42"></div>
+          <div class="fake-app dim-app" style="top:32px">
+            <div class="fa-head"><i data-icon="arrow-left"></i>배터리</div>
+            <div class="fa-big">93%</div>
+            <div class="fa-row"><div class="s">남은 시간 약 1일 4시간</div></div>
+            <div class="fa-row"><div class="t">절전 모드</div><div class="s">꺼짐</div></div>
+            <div class="fa-row"><div class="t">배터리 보호</div><div class="s">최대 85%</div></div>
+            <div class="fa-row"><div class="t">앱별 사용량</div><div class="s">지난 7일</div></div>
+          </div>
+          <div class="edge-glow"></div>
+          <div class="overlay-panel run-panel" style="bottom:40px">
+            <div class="rp-head"><img data-app="foldagent" alt=""><span>폴드 에이전트 · 3단계 · 9초</span></div>
+            <div class="row"><span class="pulse"></span><span class="rp-line">설정 › 배터리에서 잔량 읽는 중</span></div>
+            <div class="rp-btns"><span class="btn"><i data-icon="stop"></i>정지</span><span class="btn"><i data-icon="message"></i>대화방</span></div>
+          </div>
+          <div class="nav-handle"></div>
+        </div>
+      </div>
+      <div class="device-label">커버 — 일하는 동안 가장자리 빛</div>
+    </div>
+
+    <!-- 맥 -->
+    <div class="mac-col">
+      <div class="terminal">
+        <div class="terminal-bar"><span class="traffic"><i></i><i></i><i></i></span><span class="t-title">fold-agent — zsh</span></div>
+        <div class="terminal-body"><span class="t-prompt">❯</span> <span class="t-b">./dev.sh ask "배터리 몇 퍼센트야"</span>
+<span class="t-dim">07:42:03</span> step 1 → open_settings(battery)
+<span class="t-dim">07:42:07</span> step 2 → read [현재 화면]
+<span class="t-dim">07:42:12</span> step 3 → finish
+<span class="t-ok">finish[ok]</span> 배터리는 93%예요.
+
+<span class="t-prompt">❯</span> <span class="t-b">./dev.sh push-knowledge</span>
+<span class="t-ok">✓</span> 폰에 반영 (knowledge.md + apps/ 17개)
+
+<span class="t-prompt">❯</span> <span class="t-b">./dev.sh run</span>
+<span class="t-dim">BUILD SUCCESSFUL</span>
+<span class="t-ok">✓</span> 접근성 연결됨
+<span class="t-ok">✓</span> 폰에서 떴습니다
+
+<span class="t-prompt">❯</span> <span class="t-cursor"></span></div>
+      </div>
+      <div class="device-label">맥 — 빌드·설치·로그 분석(dev.sh)</div>
+    </div>
+
+  </div>
+</div>
+</body></html>

@@ -1,0 +1,46 @@
+/* 폴드 에이전트 목업 전용 부품 — 킷(kit.css) 위에 얹는다. 색은 킷 토큰만 쓴다 */
+
+/* 화면 가장자리의 붉은 빛(실제 앱: 3.6초 주기로 숨쉬기, 터치 통과) */
+.edge-glow { position: absolute; inset: 0; z-index: 44; pointer-events: none; border-radius: inherit;
+  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--accent) 70%, transparent),
+              inset 0 0 22px 4px color-mix(in srgb, var(--accent) 38%, transparent); }
+.edge-glow.amber { box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--warn) 75%, transparent),
+              inset 0 0 22px 4px color-mix(in srgb, var(--warn) 38%, transparent); }
+
+/* 뒤에 깔린 다른 앱(설정 화면 흉내) */
+.fake-app { position: absolute; inset: 0; display: flex; flex-direction: column; background: var(--bg); }
+.fake-app .fa-head { height: 56px; display: flex; align-items: center; gap: 14px; padding: 0 16px; font-size: 19px; font-weight: 700; }
+.fake-app .fa-row { padding: 14px 20px; border-bottom: 1px solid var(--border); }
+.fake-app .fa-row .t { font-size: 16px; line-height: 22px; }
+.fake-app .fa-row .s { font-size: 13px; line-height: 18px; color: var(--dim); }
+.fake-app .fa-big { padding: 18px 20px 6px; font-size: 44px; line-height: 52px; font-weight: 700; letter-spacing: -1px; }
+
+/* 진행 패널(오버레이) */
+.run-panel { left: 12px; right: 12px; }
+.run-panel .rp-head { display: flex; align-items: center; gap: 8px; font-size: 13px; line-height: 18px; color: var(--dim); }
+.run-panel .rp-head img { width: 20px; height: 20px; border-radius: 6px; }
+.run-panel .rp-line { font-size: 15px; line-height: 21px; font-weight: 600; }
+.run-panel .rp-btns { display: flex; gap: 8px; }
+.run-panel .rp-btns .btn { flex: 1; justify-content: center; }
+.pulse { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex: none; }
+.pulse.amber { background: var(--warn); }
+
+/* 대화방의 단계 목록 */
+.steps { display: flex; flex-direction: column; gap: 4px; padding: 10px 12px; border-radius: 14px; background: var(--panel); border: 1px solid var(--border); align-self: stretch; }
+.step { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; line-height: 19px; color: var(--dim); }
+.step .n { flex: none; width: 18px; height: 18px; border-radius: 50%; background: var(--panel2); color: var(--text); font-size: 11px; line-height: 18px; text-align: center; font-weight: 600; }
+.step b { color: var(--text); font-weight: 600; }
+.step.warn .n { background: color-mix(in srgb, var(--warn) 25%, transparent); }
+.step.hand .n { background: var(--accent-tint); color: var(--accent); }
+.chat { display: flex; flex-direction: column; gap: 10px; }
+
+/* 확인 카드 */
+.confirm-card { border-color: color-mix(in srgb, var(--warn) 55%, var(--border)); }
+.confirm-card .cc-head { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--dim); }
+.confirm-card .cc-title { font-size: 17px; line-height: 24px; font-weight: 700; }
+.confirm-card .cc-body { font-size: 14px; line-height: 21px; white-space: pre-line; padding: 10px 12px; border-radius: 12px; background: var(--panel); border: 1px solid var(--border); }
+.confirm-card .cc-mono { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 12.5px; line-height: 19px; }
+.btn-outline-accent { border: 1px solid var(--accent); color: var(--accent); background: transparent; }
+
+.canvas-head { position: absolute; left: 64px; top: 48px; right: 64px; }
+.caption-under { margin-top: 14px; text-align: center; font-size: 15px; line-height: 22px; color: var(--mac-dim); }

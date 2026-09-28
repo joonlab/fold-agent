@@ -1,0 +1,27 @@
+# 빌드
+build/
+.gradle/
+.kotlin/
+*.apk
+*.aab
+*.iml
+.idea/
+local.properties
+captures/
+
+# 실행 기록·인벤토리·스크린샷(개인 데이터)
+_data/
+_eval_*/
+runs/
+*.log
+*.jsonl
+stats*.json
+
+# 개인 지식(로컬에서 만든 knowledge 사본)
+knowledge/local/
+knowledge/*.local.md
+
+# 기타
+.DS_Store
+_trash/
+node_modules/

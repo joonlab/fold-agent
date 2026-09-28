@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
+    <!-- 밝기(설정 쓰기)·방해금지는 특수 권한 — adb 로 허용: ./dev.sh grant -->
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
+    <!-- 충전 중 화면 켜짐(global stay_on_while_plugged_in) 쓰기 — 시스템 권한이지만 development 플래그라 adb pm grant 로 허용(./dev.sh grant).
+         선언이 없으면 pm grant 가 「has not requested permission」으로 실패한다(2026-09-27 실측). 쓰기는 system_setting 확인 게이트 뒤에만 -->
+    <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" tools:ignore="ProtectedPermissions" />
+    <!-- 홈맥에 맡긴 작업(job)이 끝나면 알림(채널 「작업 완료」) — Android 13+ 는 실행 중 요청(MainActivity). 거부해도 결과는 방에 붙는다 -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <!-- 문자 읽기(sms_read 도구, 읽기 전용) — 실행 중 권한. adb: pm grant kr.joonlab.foldagent android.permission.READ_SMS -->
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <!-- 연락처 읽기(sms_read 가 이름 ↔ 번호를 맞춘다, 읽기 전용) — adb: pm grant kr.joonlab.foldagent android.permission.READ_CONTACTS -->
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
+    <!-- Android 11+ 패키지 가시성: 런처 앱 목록(open_app) · 음성인식 · TTS 엔진을 찾으려면 선언해야 한다 -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent>
+        <intent>
+            <action android:name="android.speech.RecognitionService" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.TTS_SERVICE" />
+        </intent>
+    </queries>
+
+    <application
+        android:label="폴드 에이전트"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:theme="@android:style/Theme.DeviceDefault.NoActionBar">
+
+        <!-- 클립보드 읽기용 투명 화면 — 채팅 태스크를 끌어올리지 않게 별도 affinity -->
+        <activity
+            android:name=".ClipReadActivity"
+            android:exported="false"
+            android:excludeFromRecents="true"
+            android:noHistory="true"
+            android:taskAffinity="kr.joonlab.foldagent.clip"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize|keyboardHidden|density|uiMode"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- 빠른 입력 팝업 — 두 번째 런처 항목(DESIGN §9). Good Lock Home Up 멀티핑거 「핀치 인」 → 「앱 실행」 → 이 항목(2026-09-27 사용자: 두 번 탭은 뒤 앱이 눌리는 일이 잦아 핀치 인으로).
+             singleInstance + 별도 affinity: 떠 있을 때 같은 제스처가 다시 오면 onNewIntent(= 말하기 끝).
+             noHistory 는 쓰지 않는다(onNewIntent 를 못 받는다). 창 배경·딤은 코드에서 투명으로 -->
+        <activity
+            android:name=".QuickAskActivity"
+            android:exported="true"
+            android:label="에이전트 빠른 입력"
+            android:icon="@drawable/ic_quick_ask"
+            android:launchMode="singleInstance"
+            android:taskAffinity="kr.joonlab.foldagent.ask"
+            android:excludeFromRecents="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize|keyboardHidden|density|uiMode"
+            android:windowSoftInputMode="adjustResize|stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <!-- 공유 시트 입구(계약 cc-capabilities/INPUTS §1) — 파일 앱 등에서 「공유 → 폴드 에이전트」 → 첨부 칩 + 입력줄.
+                 파일은 보내기를 누를 때 홈맥에 올린다(받은 uri 권한은 이 화면이 살아 있는 동안만) -->
+            <intent-filter android:label="폴드 에이전트에게">
+                <action android:name="android.intent.action.SEND" />
+                <action android:name="android.intent.action.SEND_MULTIPLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="*/*" />
+            </intent-filter>
+        </activity>
+
+        <!-- 첨부 파일(files/attach/)을 열기·공유 앱에 넘기는 읽기 전용 제공자 — 인텐트로 권한을 준 앱만 읽는다 -->
+        <provider
+            android:name=".records.AttachProvider"
+            android:authorities="kr.joonlab.foldagent.attach"
+            android:exported="false"
+            android:grantUriPermissions="true" />
+
+        <!-- 알림 읽기(notifications 도구) — 설정 「알림 접근」에서 켠다(adb: cmd notification allow_listener kr.joonlab.foldagent/kr.joonlab.foldagent.NotifyListener).
+             본문은 메모리 버퍼에만(최대 200, 디스크·로그에 안 쓴다) -->
+        <service
+            android:name=".NotifyListener"
+            android:exported="true"
+            android:label="폴드 에이전트 알림 읽기"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService" />
+            </intent-filter>
+        </service>
+
+        <service
+            android:name=".AgentService"
+            android:exported="true"
+            android:label="폴드 에이전트"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/agent_service" />
+        </service>
+    </application>
+</manifest>

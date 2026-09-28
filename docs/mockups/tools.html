@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="shot" content="w=1600,h=1000,scale=2">
+<title>폴드 에이전트 — 방법 고르기와 맡긴 일</title>
+<link rel="stylesheet" href="https://mockup-kit.invalid/kit.css">
+<script src="https://mockup-kit.invalid/kit.js"></script>
+<link rel="stylesheet" href="_app.css">
+<style>
+  .layout { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 44px; }
+  .pane.room { display: flex; flex-direction: column; gap: 10px; }
+  .way { display:flex; align-items:center; gap:12px; padding:12px; border-radius:14px; border:1px solid var(--border); background: var(--raised); }
+  .way .ico { width:36px; height:36px; border-radius:10px; background: var(--panel2); display:inline-flex; align-items:center; justify-content:center; font-size:18px; flex:none; }
+  .way.rec { border-color: var(--accent); background: var(--accent-tint); }
+  .way .t { font-size:15px; line-height:21px; font-weight:600; }
+  .way .s { font-size:12.5px; line-height:18px; color: var(--dim); }
+  .att { display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:12px; border:1px solid var(--border); background: var(--panel); }
+  .att .ico { font-size:18px; color: var(--accent); }
+  .chart { height: 96px; border-radius: 10px; background: var(--panel2); display:flex; align-items:flex-end; gap:6px; padding:10px; }
+  .chart i { display:block; flex:1; background: color-mix(in srgb, var(--accent) 70%, transparent); border-radius:3px 3px 0 0; }
+</style>
+</head><body>
+<div class="canvas app-foldagent">
+  <div class="layout">
+
+    <!-- 펼침: 방법 고르기 -->
+    <div>
+      <div class="fold-open" style="--zoom:.78">
+        <div class="screen">
+          <div class="status-bar" data-time="8:05"></div>
+          <div class="app-bar">
+            <img class="mark" data-app="foldagent" alt="">
+            <span class="title">폴드 에이전트</span>
+            <span class="status"><span class="dot ok"></span>홈 서버 연결됨</span>
+            <span class="spacer"></span>
+          </div>
+          <div class="two-pane">
+            <div class="pane room">
+              <div class="msg me">어제 본 요리 영상 핵심만 정리해 줘</div>
+              <div class="card raised">
+                <div class="card-title">어떻게 할까요?</div>
+                <div class="meta">10초 뒤에는 추천안으로 진행해요 · 7초</div>
+                <div class="way rec"><span class="ico"><i data-icon="terminal"></i></span><div class="grow"><div class="t">홈 서버에 맡기기 · 추천</div><div class="s">영상 요약 스킬 · 유료 API · 예상 약 6원</div></div></div>
+                <div class="way"><span class="ico"><i data-icon="smartphone"></i></span><div class="grow"><div class="t">유튜브 앱에서 직접</div><div class="s">시청 기록에서 찾아 설명란·챕터를 읽기</div></div></div>
+                <div class="way"><span class="ico"><i data-icon="search"></i></span><div class="grow"><div class="t">웹 검색</div><div class="s">제목으로 찾아 요약 글 읽기</div></div></div>
+                <div class="row gap-8"><span class="btn grow" style="justify-content:center"><i data-icon="pencil"></i>직접 답하기</span></div>
+              </div>
+            </div>
+            <div class="pane room">
+              <div class="msg me">1부터 1000까지 소수 개수랑 분포 그래프</div>
+              <div class="steps">
+                <div class="step"><span class="n">1</span><span><b>code_run</b> 격리 컨테이너 · 네트워크 없음</span></div>
+              </div>
+              <div class="msg">소수는 168개예요. 100 단위 구간별 개수를 그래프로 붙였어요.</div>
+              <div class="chart"><i style="height:100%"></i><i style="height:84%"></i><i style="height:64%"></i><i style="height:64%"></i><i style="height:68%"></i><i style="height:56%"></i><i style="height:64%"></i><i style="height:56%"></i><i style="height:60%"></i><i style="height:56%"></i></div>
+              <div class="att"><i class="ico" data-icon="image"></i><div class="grow"><div class="label">primes.png</div><div class="caption">첨부 · 갤러리에 저장됨</div></div></div>
+            </div>
+          </div>
+          <div class="input-bar">
+            <div class="input placeholder">말하거나 입력하세요…</div>
+            <span class="send-btn"><i data-icon="paperclip"></i></span>
+          </div>
+          <div class="nav-handle"></div>
+        </div>
+      </div>
+      <div class="device-label">길이 여럿이면 먼저 고르게 한다 · 계산은 격리 컨테이너</div>
+    </div>
+
+    <!-- 커버: 맡긴 일 끝 알림 -->
+    <div>
+      <div class="fold-cover" style="--zoom:.78">
+        <div class="screen">
+          <div class="status-bar" data-time="8:07"></div>
+          <div class="content" style="padding-top:18px">
+            <div class="section-label">알림</div>
+            <div class="notif-stack">
+              <div class="notif heads-up">
+                <div class="notif-head"><img data-app="foldagent" alt=""><span>폴드 에이전트 · 작업 완료 · 지금</span></div>
+                <div class="notif-title">요리 영상 요약이 끝났어요</div>
+                <div class="notif-body">맡긴 대화방에 결과를 붙였어요 · 파일 1개</div>
+                <div class="notif-actions"><span>대화방 열기</span></div>
+              </div>
+              <div class="notif">
+                <div class="notif-head"><img data-app="foldagent" alt=""><span>폴드 에이전트 · 2분 전</span></div>
+                <div class="notif-title">홈 서버에 맡겼어요</div>
+                <div class="notif-body">영상 요약 · 끝나면 알려 드릴게요</div>
+              </div>
+            </div>
+            <div class="section-label">대화방</div>
+            <div class="msg">핵심 3가지: 양파는 약불로 10분, 소금은 마지막에, 면수는 한 국자 남겨 두기.</div>
+            <div class="att"><i class="ico" data-icon="file-text"></i><div class="grow"><div class="label">summary.md</div><div class="caption">첨부 · 2.1KB</div></div></div>
+          </div>
+          <div class="nav-handle"></div>
+        </div>
+      </div>
+      <div class="device-label">오래 걸리면 뒤로 맡기고 끝나면 알림</div>
+    </div>
+
+  </div>
+</div>
+</body></html>

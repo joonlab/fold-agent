@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="shot" content="w=1600,h=1000,scale=2">
+<title>폴드 에이전트 — 확인 게이트</title>
+<link rel="stylesheet" href="https://mockup-kit.invalid/kit.css">
+<script src="https://mockup-kit.invalid/kit.js"></script>
+<link rel="stylesheet" href="_app.css">
+<style>
+  .layout { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 44px; }
+  .pane.room { display: flex; flex-direction: column; gap: 10px; }
+  .notif.heads-up { margin: 6px 16px 4px; }
+</style>
+</head><body>
+<div class="canvas app-foldagent">
+  <div class="layout">
+
+    <!-- 커버: 쓰기 동작 확인 -->
+    <div>
+      <div class="fold-cover" style="--zoom:.78">
+        <div class="screen">
+          <div class="status-bar" data-time="3:05"></div>
+          <div class="app-bar">
+            <img class="mark" data-app="foldagent" alt="">
+            <span class="title">폴드 에이전트</span>
+            <span class="status"><span class="pulse amber"></span>확인 대기</span>
+            <span class="spacer"></span>
+          </div>
+          <div class="content">
+            <div class="msg me">내일 오후 3시에 민지랑 회의 일정 넣고, 민지한테 회의 메모 보내 줘</div>
+            <div class="steps">
+              <div class="step"><span class="n">1</span><span><b>agenda</b> 내일 일정 확인 — 겹침 없음</span></div>
+              <div class="step warn"><span class="n">2</span><span><b>event_create</b> 확인을 기다리는 중</span></div>
+            </div>
+            <div class="card confirm-card raised">
+              <div class="cc-head"><i data-icon="calendar"></i><span>일정을 만들까요?</span></div>
+              <div class="cc-title">민지와 회의</div>
+              <div class="cc-body">내일(화) 오후 3:00 – 4:00
+캘린더: 업무
+메모: 회의 메모 공유, 다음 주 발표 순서</div>
+              <div class="row gap-8">
+                <span class="btn btn-primary grow" style="justify-content:center">취소</span>
+                <span class="btn btn-outline-accent grow" style="justify-content:center">실행</span>
+              </div>
+              <div class="caption dim">40초 동안 답이 없으면 실행하지 않아요</div>
+            </div>
+          </div>
+          <div class="edge-glow amber"></div>
+          <div class="nav-handle"></div>
+        </div>
+      </div>
+      <div class="device-label">쓰기 동작은 도구 종류만 보고 무조건 묻는다</div>
+    </div>
+
+    <!-- 펼침: 홈 서버 Claude Code 위임의 원격 확인 -->
+    <div>
+      <div class="fold-open" style="--zoom:.78">
+        <div class="screen">
+          <div class="status-bar" data-time="3:12"></div>
+          <div class="notif heads-up">
+            <div class="notif-head"><img data-app="foldagent" alt=""><span>폴드 에이전트 · 원격 확인 · 지금</span></div>
+            <div class="notif-title">맡긴 일이 확인을 기다려요</div>
+            <div class="notif-body">Write: memo.md — 누르면 원문 전체를 보고 정해요</div>
+          </div>
+          <div class="app-bar">
+            <img class="mark" data-app="foldagent" alt="">
+            <span class="title">폴드 에이전트</span>
+            <span class="spacer"></span>
+          </div>
+          <div class="two-pane list-detail">
+            <div class="pane">
+              <div class="section-label">맡긴 일</div>
+              <div class="list">
+                <div class="list-row selected"><i class="ico" data-icon="terminal"></i><div class="grow"><div class="card-title ellipsis">회의 메모 요약해 파일로</div><div class="meta ellipsis">claude_task · 확인 대기</div></div></div>
+                <div class="list-row"><i class="ico" data-icon="file-text"></i><div class="grow"><div class="card-title ellipsis">할 일 3개 엑셀로</div><div class="meta ellipsis">code_run · 끝남 · 30초</div></div></div>
+                <div class="list-row"><i class="ico" data-icon="search"></i><div class="grow"><div class="card-title ellipsis">이번 주 전시 찾아보기</div><div class="meta ellipsis">web_search · 끝남</div></div></div>
+              </div>
+            </div>
+            <div class="pane room">
+              <div class="msg me">홈 서버 Claude Code 에 맡겨 줘: 받은 회의 메모를 요약해서 memo.md 로</div>
+              <div class="card confirm-card raised">
+                <div class="cc-head"><i data-icon="terminal"></i><span>홈 서버의 Claude Code 가 이 동작을 하려고 해요</span></div>
+                <div class="cc-title">Write · memo.md</div>
+                <div class="cc-body cc-mono"># 회의 메모 요약
+- 다음 주 발표 순서: 민지 → 서준
+- 자료 마감: 목요일 저녁
+- 다음 회의 장소 예약 필요</div>
+                <div class="meta">작업 폴더 안 · 남은 대기 9분 40초 · 발송·삭제는 서버가 늘 차단</div>
+                <div class="row gap-8">
+                  <span class="btn btn-primary grow" style="justify-content:center">거부</span>
+                  <span class="btn btn-outline-accent grow" style="justify-content:center">허용</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="nav-handle"></div>
+        </div>
+      </div>
+      <div class="device-label">위임한 일의 부작용도 원문으로 폰에서 확인</div>
+    </div>
+
+  </div>
+</div>
+</body></html>

@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="shot" content="w=1600,h=1000,scale=2">
+<title>폴드 에이전트 — 사람 개입</title>
+<link rel="stylesheet" href="https://mockup-kit.invalid/kit.css">
+<script src="https://mockup-kit.invalid/kit.js"></script>
+<link rel="stylesheet" href="_app.css">
+<style>
+  .layout { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 30px; }
+  .arrow { font-size: 30px; color: var(--mac-dim); }
+  .stepno { display:inline-flex; width:24px; height:24px; border-radius:50%; background: var(--accent); color: var(--on-accent); font-size: 13px; font-weight: 700; align-items:center; justify-content:center; margin-right:6px; }
+  .tap-dot { position:absolute; z-index:43; width:34px; height:34px; border-radius:50%; border:2px solid var(--accent); background: color-mix(in srgb, var(--accent) 18%, transparent); }
+</style>
+</head><body>
+<div class="canvas app-foldagent">
+  <div class="layout">
+
+    <!-- 1. 헤매는 중 -->
+    <div>
+      <div class="fold-cover" style="--zoom:.7">
+        <div class="screen">
+          <div class="status-bar" data-time="9:18"></div>
+          <div class="fake-app dim-app" style="top:32px">
+            <div class="fa-head"><i data-icon="arrow-left"></i>커버 화면</div>
+            <div class="fa-row"><div class="t">위젯</div><div class="s">날씨, 음악, 일정</div></div>
+            <div class="fa-row"><div class="t">시계 스타일</div><div class="s">디지털</div></div>
+            <div class="fa-row"><div class="t">알림</div><div class="s">아이콘만</div></div>
+            <div class="fa-row"><div class="t">앱 열기</div><div class="s">허용된 앱 3개</div></div>
+          </div>
+          <div class="edge-glow"></div>
+          <div class="overlay-panel run-panel" style="bottom:40px">
+            <div class="rp-head"><img data-app="foldagent" alt=""><span>폴드 에이전트 · 9단계 · 38초</span></div>
+            <div class="row"><span class="pulse"></span><span class="rp-line">「시계 위젯」 항목을 다시 찾는 중</span></div>
+            <div class="rp-btns"><span class="btn"><i data-icon="stop"></i>정지</span><span class="btn btn-outline-accent"><i data-icon="pause"></i>내가 할게</span></div>
+          </div>
+          <div class="nav-handle"></div>
+        </div>
+      </div>
+      <div class="device-label"><span class="stepno">1</span>같은 목록을 오가며 헤맨다</div>
+    </div>
+
+    <div class="arrow"><i data-icon="arrow-right"></i></div>
+
+    <!-- 2. 사람 차례 -->
+    <div>
+      <div class="fold-cover" style="--zoom:.7">
+        <div class="screen">
+          <div class="status-bar" data-time="9:19"></div>
+          <div class="fake-app" style="top:32px">
+            <div class="fa-head"><i data-icon="arrow-left"></i>위젯</div>
+            <div class="fa-row"><div class="t">날씨</div><div class="s">켜짐</div></div>
+            <div class="fa-row"><div class="t">시계</div><div class="s">로밍 중에는 바꿀 수 없어요</div></div>
+            <div class="fa-row"><div class="t">음악</div><div class="s">켜짐</div></div>
+          </div>
+          <div class="tap-dot" style="left:190px; top:188px"></div>
+          <div class="overlay-panel run-panel" style="bottom:40px">
+            <div class="rp-head"><img data-app="foldagent" alt=""><span>사람 개입 · 42초 · 누른 것 3</span></div>
+            <div class="row"><span class="pulse amber"></span><span class="rp-line">내 차례 — 조작하거나 말한 뒤 이어서</span></div>
+            <div class="body dim">「로밍 중에는 시계 위젯을 못 바꾼대」</div>
+            <div class="rp-btns"><span class="btn"><i data-icon="mic"></i>말하기</span><span class="btn btn-primary"><i data-icon="play"></i>이어서</span></div>
+          </div>
+          <div class="nav-handle"></div>
+        </div>
+      </div>
+      <div class="device-label"><span class="stepno">2</span>넘겨받아 몇 번 누르고 한마디</div>
+    </div>
+
+    <div class="arrow"><i data-icon="arrow-right"></i></div>
+
+    <!-- 3. 이어서 -->
+    <div>
+      <div class="fold-cover" style="--zoom:.7">
+        <div class="screen">
+          <div class="status-bar" data-time="9:20"></div>
+          <div class="app-bar">
+            <img class="mark" data-app="foldagent" alt="">
+            <span class="title">대화방</span>
+            <span class="spacer"></span>
+          </div>
+          <div class="content">
+            <div class="msg me">커버 화면 시계 위젯을 큰 글씨로 바꿔 줘</div>
+            <div class="steps">
+              <div class="step"><span class="n">…</span><span>1~9단계 설정 목록 탐색</span></div>
+              <div class="step hand"><span class="n"><i data-icon="pause" style="font-size:11px"></i></span><span><b>사람 개입 42초</b> — 누른 것: 커버 화면 › 위젯 › 시계 · 한 말: 「로밍 중에는 시계 위젯을 못 바꾼대」</span></div>
+              <div class="step"><span class="n">10</span><span><b>read</b> 넘겨받은 화면에서 이어서</span></div>
+              <div class="step"><span class="n">11</span><span><b>finish</b> 실패로 정직하게 보고</span></div>
+            </div>
+            <div class="msg">지금은 로밍 중이라 시계 위젯을 바꿀 수 없어요. 로밍이 끝나면 커버 화면 › 위젯 › 시계에서 바꿀 수 있어요.</div>
+          </div>
+          <div class="nav-handle"></div>
+        </div>
+      </div>
+      <div class="device-label"><span class="stepno">3</span>처음부터가 아니라 그 화면에서 이어 간다</div>
+    </div>
+
+  </div>
+</div>
+</body></html>

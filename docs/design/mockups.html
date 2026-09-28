@@ -1,0 +1,493 @@
+<title>폴드 에이전트 시안</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;500;600;700&family=Gowun+Dodum&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --page:#ECEEEF; --ink:#16191B; --muted:#5B6166; --rule:#D3D7DA; --card:#F8F9F9; --chip:#E1E4E6;
+  --period:3.6s;
+  --ui:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --page:#111416; --ink:#E4E7E9; --muted:#9AA1A6; --rule:#2A3034; --card:#181C1F; --chip:#232A2E; color-scheme:dark; }
+}
+:root[data-theme="dark"]{ --page:#111416; --ink:#E4E7E9; --muted:#9AA1A6; --rule:#2A3034; --card:#181C1F; --chip:#232A2E; color-scheme:dark; }
+
+body{ background:var(--page); color:var(--ink); font-family:var(--ui); font-size:15px; line-height:1.6; }
+.wrap{ max-width:1180px; margin:0 auto; padding-inline:20px; padding-block:28px 64px; }
+h1{ font-size:30px; line-height:1.25; margin:0 0 8px; font-weight:700; letter-spacing:-.01em; text-wrap:balance; }
+.lede{ color:var(--muted); max-width:68ch; margin:0; }
+.bar{ display:flex; flex-wrap:wrap; gap:10px 18px; align-items:center; margin-top:18px; padding:12px 14px; background:var(--card); border:1px solid var(--rule); border-radius:12px; font-size:13.5px; }
+.bar b{ font-weight:600; }
+.seg{ display:inline-flex; border:1px solid var(--rule); border-radius:999px; overflow:hidden; }
+.seg button{ font:inherit; font-size:13px; border:0; background:transparent; color:var(--ink); padding:5px 12px; cursor:pointer; }
+.seg button[aria-pressed="true"]{ background:var(--ink); color:var(--page); }
+.seg button:focus-visible{ outline:2px solid #E5484D; outline-offset:-2px; }
+.bar .note{ color:var(--muted); }
+
+section.dir{ margin-top:48px; padding-top:28px; border-top:1px solid var(--rule); }
+.dhead{ display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,1fr); gap:18px 32px; align-items:start; }
+@media (max-width:760px){ .dhead{ grid-template-columns:1fr; } }
+.dno{ font-family:var(--mono); font-size:12px; color:var(--muted); letter-spacing:.08em; text-transform:uppercase; }
+.dname{ font-size:34px; line-height:1.15; margin:4px 0 6px; font-weight:700; display:flex; flex-wrap:wrap; align-items:baseline; gap:6px 12px; }
+.dname small{ font-family:var(--mono); font-size:14px; font-weight:400; color:var(--muted); }
+.rec{ font-family:var(--ui); font-size:12px; font-weight:600; padding:2px 9px; border-radius:999px; background:#E5484D; color:#fff; align-self:center; }
+.dline{ margin:0; max-width:52ch; }
+.sw{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
+.sw span{ display:flex; align-items:center; gap:7px; font-size:12px; padding:4px 10px 4px 5px; border-radius:999px; background:var(--chip); }
+.sw i{ width:18px; height:18px; border-radius:50%; display:block; box-shadow:inset 0 0 0 1px rgba(127,127,127,.35); }
+.sw code{ font-family:var(--mono); font-size:11.5px; color:var(--muted); }
+dl.meta{ margin:0; display:grid; grid-template-columns:auto 1fr; gap:4px 12px; font-size:13.5px; }
+dl.meta dt{ color:var(--muted); }
+dl.meta dd{ margin:0; }
+
+.phones{ display:grid; grid-template-columns:repeat(auto-fill,minmax(232px,1fr)); gap:26px 20px; margin-top:24px; }
+figure{ margin:0; display:flex; flex-direction:column; gap:10px; }
+figcaption{ font-size:13px; line-height:1.5; }
+figcaption b{ display:block; font-weight:600; font-size:13.5px; }
+figcaption span{ color:var(--muted); }
+figure.wide{ grid-column:1/-1; }
+figure.wide .phone{ max-width:900px; }
+.phone{ background:#0A0A0B; padding:5px; border-radius:30px; box-shadow:0 0 0 1px rgba(127,127,127,.25); max-width:100%; }
+.scr{ position:relative; overflow:hidden; border-radius:25px; aspect-ratio:1248/1972; container-type:inline-size; --dpw:475; }
+.scr.wd{ aspect-ratio:2448/1848; --dpw:933; border-radius:22px; }
+
+/* ───── 앱 화면 공통(단위: 1dp = --s) ───── */
+.app{ --s:calc(100cqw / var(--dpw)); position:absolute; inset:0; font-family:var(--f); color:var(--text); background:var(--bg); display:flex; flex-direction:column; font-size:calc(var(--s)*14); line-height:1.45; font-variant-numeric:tabular-nums; }
+.app *{ box-sizing:border-box; }
+.app{ border-radius:inherit; }
+.ic{ width:1em; height:1em; display:block; flex:none; }
+.sb{ height:calc(var(--s)*30); padding:0 calc(var(--s)*20); display:flex; align-items:center; justify-content:space-between; font-size:calc(var(--s)*12.5); font-weight:600; flex:none; }
+.sb .r{ display:flex; gap:calc(var(--s)*5); align-items:center; }
+.sb .r i{ display:block; width:calc(var(--s)*15); height:calc(var(--s)*9); border-radius:calc(var(--s)*2); background:currentColor; opacity:.8; }
+.sb .r i:first-child{ width:calc(var(--s)*9); border-radius:50%; }
+.navb{ position:absolute; left:50%; bottom:calc(var(--s)*7); width:calc(var(--s)*118); height:calc(var(--s)*4); margin-left:calc(var(--s)*-59); border-radius:9px; background:currentColor; opacity:.45; z-index:9; }
+
+.hd{ display:flex; align-items:center; gap:calc(var(--s)*8); padding:calc(var(--s)*6) calc(var(--s)*16) calc(var(--s)*8); flex:none; }
+.brand{ font-family:var(--fd); font-size:calc(var(--s)*19); font-weight:700; flex:1; min-width:0; display:flex; align-items:center; gap:calc(var(--s)*8); letter-spacing:-.01em; }
+.mark{ width:calc(var(--s)*20); height:calc(var(--s)*20); border-radius:50%; background:radial-gradient(circle at 50% 50%, var(--glow) 0 32%, transparent 34%), var(--accentTint); box-shadow:0 0 0 calc(var(--s)*1.5) var(--glow) inset; flex:none; }
+.ib{ width:calc(var(--s)*36); height:calc(var(--s)*36); border-radius:calc(var(--s)*var(--rsm)); background:var(--panel2); display:grid; place-items:center; font-size:calc(var(--s)*18); color:var(--dim); flex:none; }
+
+.state{ margin:0 calc(var(--s)*16) calc(var(--s)*10); padding:calc(var(--s)*11) calc(var(--s)*12) calc(var(--s)*11) calc(var(--s)*14); border-radius:calc(var(--s)*var(--rc)); background:var(--accentTint); display:flex; align-items:center; gap:calc(var(--s)*10); flex:none; }
+.state .tx{ flex:1; min-width:0; }
+.state .a{ font-size:calc(var(--s)*13.5); font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.state .b{ font-size:calc(var(--s)*11.5); color:var(--dim); }
+.bdot{ width:calc(var(--s)*9); height:calc(var(--s)*9); border-radius:50%; background:var(--glow); flex:none; animation:breathe calc(var(--period)/2) cubic-bezier(.4,0,.2,1) infinite alternate; box-shadow:0 0 calc(var(--s)*8) var(--glow); }
+.stopc{ width:calc(var(--s)*36); height:calc(var(--s)*36); border-radius:50%; background:var(--accent); color:var(--onAccent); display:grid; place-items:center; font-size:calc(var(--s)*14); flex:none; }
+.stopc.sm{ width:calc(var(--s)*30); height:calc(var(--s)*30); font-size:calc(var(--s)*11); }
+
+.chips{ display:flex; gap:calc(var(--s)*6); padding:0 calc(var(--s)*16) calc(var(--s)*4); overflow:hidden; flex:none; }
+.chip{ height:calc(var(--s)*28); padding:0 calc(var(--s)*11); border-radius:999px; border:1px solid var(--border); font-size:calc(var(--s)*12); display:flex; align-items:center; white-space:nowrap; color:var(--dim); flex:none; }
+.chip.on{ background:var(--accentTint); border-color:var(--accent); color:var(--accentText); font-weight:600; }
+
+.list{ flex:1; overflow:hidden; padding-bottom:calc(var(--s)*80); }
+.dh{ font-size:calc(var(--s)*11.5); font-weight:600; color:var(--dim); padding:calc(var(--s)*10) calc(var(--s)*16) calc(var(--s)*4); letter-spacing:.02em; }
+.row{ display:grid; grid-template-columns:auto minmax(0,1fr) auto; gap:calc(var(--s)*11); align-items:start; padding:calc(var(--s)*9) calc(var(--s)*16); position:relative; }
+.tile{ width:calc(var(--s)*36); height:calc(var(--s)*36); border-radius:calc(var(--s)*var(--rsm)); background:var(--panel2); display:grid; place-items:center; font-size:calc(var(--s)*18); color:var(--dim); }
+.t1{ font-size:calc(var(--s)*14); font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.t2{ font-size:calc(var(--s)*12); color:var(--dim); display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; line-height:1.4; }
+.rt{ display:flex; flex-direction:column; align-items:flex-end; gap:calc(var(--s)*5); font-size:calc(var(--s)*11); color:var(--dim); white-space:nowrap; }
+.rt .flags{ display:flex; gap:calc(var(--s)*5); align-items:center; font-size:calc(var(--s)*12); }
+.pill{ font-size:calc(var(--s)*10.5); padding:0 calc(var(--s)*6); border-radius:999px; background:var(--panel2); color:var(--dim); line-height:1.6; }
+.stt{ font-size:calc(var(--s)*10.5); padding:0 calc(var(--s)*6); border-radius:999px; line-height:1.6; font-weight:600; }
+.stt.fail{ background:var(--warnTint); color:var(--warn); }
+.stt.cancel{ background:var(--panel2); color:var(--dim); }
+.row.run{ background:var(--accentTint); }
+.row.run .rt{ justify-content:center; }
+.pin{ color:var(--accentText); }
+
+.composer{ position:absolute; left:0; right:0; bottom:0; padding:calc(var(--s)*8) calc(var(--s)*12) calc(var(--s)*22); display:flex; gap:calc(var(--s)*8); align-items:center; background:linear-gradient(transparent, var(--bg) 30%); z-index:5; }
+.field{ flex:1; min-width:0; height:calc(var(--s)*44); border-radius:calc(var(--s)*var(--rfield)); background:var(--panel2); border:1px solid var(--fieldBorder); display:flex; align-items:center; padding:0 calc(var(--s)*14); font-size:calc(var(--s)*14); color:var(--dim); white-space:nowrap; overflow:hidden; }
+.cbtn{ width:calc(var(--s)*42); height:calc(var(--s)*42); border-radius:50%; display:grid; place-items:center; font-size:calc(var(--s)*19); background:var(--panel2); color:var(--dim); flex:none; }
+.cbtn.go{ background:var(--accent); color:var(--onAccent); }
+
+/* 대화방 */
+.chd{ display:flex; gap:calc(var(--s)*8); align-items:flex-start; padding:calc(var(--s)*6) calc(var(--s)*12) calc(var(--s)*10); border-bottom:1px solid var(--hair); flex:none; }
+.chd .ib{ background:transparent; }
+.chd .tt{ flex:1; min-width:0; padding-top:calc(var(--s)*4); }
+.chd .t{ font-family:var(--fd); font-size:calc(var(--s)*16); font-weight:700; line-height:1.3; }
+.chd .m{ font-size:calc(var(--s)*11.5); color:var(--dim); }
+.msgs{ flex:1; overflow:hidden; padding:calc(var(--s)*12) calc(var(--s)*14) calc(var(--s)*80); display:flex; flex-direction:column; gap:calc(var(--s)*8); }
+.me{ align-self:flex-end; max-width:82%; background:var(--meBg); color:var(--meText); padding:calc(var(--s)*9) calc(var(--s)*12); border-radius:calc(var(--s)*14) calc(var(--s)*14) calc(var(--s)*4) calc(var(--s)*14); font-size:calc(var(--s)*13.5); }
+.src{ align-self:flex-end; font-size:calc(var(--s)*10.5); color:var(--dim); display:flex; gap:calc(var(--s)*4); align-items:center; margin-top:calc(var(--s)*-4); }
+.src .ic{ font-size:calc(var(--s)*11); }
+.steps{ align-self:flex-start; display:flex; align-items:center; gap:calc(var(--s)*6); font-size:calc(var(--s)*12); color:var(--dim); background:var(--panel2); padding:calc(var(--s)*6) calc(var(--s)*10); border-radius:calc(var(--s)*var(--rsm)); }
+.steps .ic{ font-size:calc(var(--s)*13); }
+.cf{ align-self:flex-start; font-size:calc(var(--s)*11.5); color:var(--dim); border:1px dashed var(--border); padding:calc(var(--s)*5) calc(var(--s)*10); border-radius:calc(var(--s)*var(--rsm)); }
+.cf b{ color:var(--text); font-weight:600; }
+.ag{ align-self:flex-start; max-width:86%; background:var(--agBg); border:1px solid var(--agBorder); padding:calc(var(--s)*9) calc(var(--s)*12); border-radius:calc(var(--s)*14) calc(var(--s)*14) calc(var(--s)*14) calc(var(--s)*4); font-size:calc(var(--s)*13.5); }
+.agm{ align-self:flex-start; display:flex; gap:calc(var(--s)*6); align-items:center; font-size:calc(var(--s)*11); color:var(--dim); margin-top:calc(var(--s)*-3); }
+.agm .ok{ color:var(--okc); font-weight:600; }
+.rb{ border:1px solid var(--border); border-radius:999px; padding:0 calc(var(--s)*8); line-height:1.7; }
+.rb.on{ border-color:var(--accent); color:var(--accentText); }
+.sep{ align-self:center; font-size:calc(var(--s)*10.5); color:var(--dim); padding:calc(var(--s)*4) 0; }
+
+/* 다른 앱(시스템 화면) — 방향과 무관한 배경 */
+.sys{ --text:#1C1C1E; --dim:#6E6E73; background:#F5F5F7; color:#1C1C1E; }
+.sys .sb{ color:#1C1C1E; }
+.sysh{ font-size:calc(var(--s)*26); font-weight:600; padding:calc(var(--s)*26) calc(var(--s)*22) calc(var(--s)*14); letter-spacing:-.01em; }
+.sysg{ margin:0 calc(var(--s)*12) calc(var(--s)*12); background:#fff; border-radius:calc(var(--s)*22); padding:calc(var(--s)*4) 0; }
+.sysr{ padding:calc(var(--s)*13) calc(var(--s)*18); font-size:calc(var(--s)*15); display:flex; justify-content:space-between; align-items:center; gap:calc(var(--s)*10); position:relative; }
+.sysr small{ display:block; font-size:calc(var(--s)*12); color:#3E7BFA; }
+.sld{ height:calc(var(--s)*6); border-radius:9px; background:#D9D9DE; margin:calc(var(--s)*4) calc(var(--s)*18) calc(var(--s)*14); position:relative; }
+.sld::before{ content:""; position:absolute; left:0; top:0; bottom:0; width:40%; border-radius:9px; background:#3E7BFA; }
+.sld::after{ content:""; position:absolute; left:40%; top:50%; width:calc(var(--s)*22); height:calc(var(--s)*22); margin:calc(var(--s)*-11); border-radius:50%; background:#fff; box-shadow:0 1px 4px rgba(0,0,0,.25); }
+.tog{ width:calc(var(--s)*40); height:calc(var(--s)*22); border-radius:99px; background:#D1D1D6; position:relative; flex:none; }
+.tog.on{ background:#3E7BFA; }
+.tog::after{ content:""; position:absolute; top:calc(var(--s)*2); left:calc(var(--s)*2); width:calc(var(--s)*18); height:calc(var(--s)*18); border-radius:50%; background:#fff; }
+.tog.on::after{ left:auto; right:calc(var(--s)*2); }
+.cal .day{ display:flex; gap:calc(var(--s)*14); padding:calc(var(--s)*10) calc(var(--s)*18); font-size:calc(var(--s)*14); align-items:flex-start; }
+.cal .day b{ width:calc(var(--s)*44); font-size:calc(var(--s)*12); color:#6E6E73; font-weight:500; padding-top:calc(var(--s)*2); flex:none; }
+.cal .ev{ flex:1; border-left:calc(var(--s)*3) solid #3E7BFA; padding:calc(var(--s)*2) calc(var(--s)*10); background:#EEF3FF; border-radius:calc(var(--s)*6); }
+.cal .ev.g{ border-color:#2FA86B; background:#EAF7F0; }
+.cal .ev small{ display:block; color:#6E6E73; font-size:calc(var(--s)*11.5); }
+.bub{ max-width:74%; padding:calc(var(--s)*9) calc(var(--s)*12); border-radius:calc(var(--s)*18); font-size:calc(var(--s)*14); margin:calc(var(--s)*4) calc(var(--s)*14); }
+.bub.l{ background:#fff; align-self:flex-start; }
+.bub.r{ background:#FEE500; align-self:flex-end; }
+.msgcol{ display:flex; flex-direction:column; padding-top:calc(var(--s)*8); }
+.typed{ position:absolute; left:calc(var(--s)*10); right:calc(var(--s)*10); bottom:calc(var(--s)*22); background:#fff; border-radius:calc(var(--s)*22); padding:calc(var(--s)*11) calc(var(--s)*16); font-size:calc(var(--s)*14); display:flex; justify-content:space-between; align-items:center; }
+.typed i{ font-style:normal; color:#3E7BFA; font-weight:600; }
+
+/* 테두리 빛 */
+.glow{ position:absolute; inset:0; pointer-events:none; z-index:20; border-radius:inherit;
+  box-shadow: inset 0 0 calc(var(--s)*var(--gw)) calc(var(--s)*var(--gspread)) var(--glowC), inset 0 0 0 var(--gline) var(--glowC);
+  animation:breathe calc(var(--period)/2) cubic-bezier(.4,0,.2,1) infinite alternate; }
+.glow.wait{ --glowC:var(--glowWait); animation:none; opacity:.62; }
+@keyframes breathe{ from{ opacity:var(--gmin,.25); } to{ opacity:var(--gmax,.9); } }
+.tap{ position:absolute; width:calc(var(--s)*34); height:calc(var(--s)*34); margin:calc(var(--s)*-17); border-radius:50%; border:calc(var(--s)*2) solid var(--glowC); z-index:21; animation:ping 1.4s ease-out infinite; }
+@keyframes ping{ 0%{ transform:scale(.5); opacity:1; } 100%{ transform:scale(1.5); opacity:0; } }
+
+/* 상태 패널(오버레이) */
+.ov{ position:absolute; top:calc(var(--s)*38); left:4%; right:4%; z-index:30; background:var(--ovBg); color:var(--ovText); border:1px solid var(--ovLine); border-radius:calc(var(--s)*var(--rov)); padding:calc(var(--s)*9) calc(var(--s)*9) calc(var(--s)*9) calc(var(--s)*14); display:flex; align-items:center; gap:calc(var(--s)*10); font-family:var(--f); backdrop-filter:blur(8px); }
+.ov .tx{ flex:1; min-width:0; }
+.ov .a{ font-size:calc(var(--s)*13.5); font-weight:600; line-height:1.35; }
+.ov .b{ font-size:calc(var(--s)*11); opacity:.68; font-family:var(--fm); }
+.ov .bdot{ background:var(--glowC); box-shadow:0 0 calc(var(--s)*8) var(--glowC); }
+.stopp{ border:1px solid var(--glowC); color:var(--ovText); border-radius:999px; padding:calc(var(--s)*6) calc(var(--s)*13); font-size:calc(var(--s)*13); font-weight:600; display:flex; gap:calc(var(--s)*6); align-items:center; flex:none; }
+.stopp .ic{ font-size:calc(var(--s)*10); color:var(--glowC); }
+.ov.ask{ flex-direction:column; align-items:stretch; gap:calc(var(--s)*8); padding:calc(var(--s)*14); }
+.ov.ask .h{ display:flex; align-items:center; gap:calc(var(--s)*8); font-size:calc(var(--s)*15); font-weight:700; }
+.ov.ask .h .bdot{ animation:none; background:var(--glowWait); box-shadow:none; }
+.kv{ display:grid; grid-template-columns:auto 1fr; gap:calc(var(--s)*3) calc(var(--s)*10); font-size:calc(var(--s)*13); }
+.kv span{ opacity:.62; }
+.timer{ height:calc(var(--s)*3); border-radius:9px; background:rgba(127,127,127,.3); overflow:hidden; }
+.timer i{ display:block; height:100%; width:80%; background:var(--glowWait); }
+.tl{ font-size:calc(var(--s)*11); opacity:.68; }
+.btns{ display:flex; gap:calc(var(--s)*8); }
+.btns div{ height:calc(var(--s)*42); border-radius:calc(var(--s)*var(--rbtn)); display:grid; place-items:center; font-size:calc(var(--s)*14); font-weight:600; }
+.btns .no{ flex:1.5; background:var(--ovBtn); }
+.btns .yes{ flex:1; border:1px solid var(--accentOnOv); color:var(--accentOnOv); }
+
+/* 팝업 입력 카드 */
+.pop{ position:absolute; left:calc(var(--s)*10); right:calc(var(--s)*10); bottom:calc(var(--s)*20); z-index:30; background:var(--raised); color:var(--text); border-radius:calc(var(--s)*var(--rsheet)); padding:calc(var(--s)*12) calc(var(--s)*12) calc(var(--s)*10); box-shadow:0 calc(var(--s)*10) calc(var(--s)*30) rgba(0,0,0,.28), 0 0 0 1px var(--popLine); font-family:var(--f); display:flex; flex-direction:column; gap:calc(var(--s)*10); }
+.pop .chips{ padding:0; }
+.pop .chip{ background:var(--panel2); border-color:transparent; color:var(--text); }
+.inrow{ display:flex; gap:calc(var(--s)*9); align-items:center; }
+.inrow .mark{ width:calc(var(--s)*26); height:calc(var(--s)*26); }
+.heard{ flex:1; min-width:0; font-size:calc(var(--s)*16); line-height:1.35; }
+.heard i{ font-style:normal; color:var(--dim); }
+.wave{ display:flex; gap:calc(var(--s)*3); align-items:center; height:calc(var(--s)*18); margin-bottom:calc(var(--s)*4); }
+.wave b{ width:calc(var(--s)*3); border-radius:9px; background:var(--accent); height:40%; animation:wv 1s ease-in-out infinite alternate; }
+.wave b:nth-child(2){ animation-delay:-.2s } .wave b:nth-child(3){ animation-delay:-.5s } .wave b:nth-child(4){ animation-delay:-.1s } .wave b:nth-child(5){ animation-delay:-.7s } .wave b:nth-child(6){ animation-delay:-.35s } .wave b:nth-child(7){ animation-delay:-.6s }
+@keyframes wv{ from{ height:25%; } to{ height:100%; } }
+.mic.live{ background:var(--accent); color:var(--onAccent); box-shadow:0 0 0 calc(var(--s)*5) var(--accentTint); }
+.hint{ display:flex; justify-content:space-between; font-size:calc(var(--s)*11); color:var(--dim); padding:0 calc(var(--s)*4); }
+
+/* 펼침 2칸 */
+.panes{ flex:1; display:grid; grid-template-columns:calc(var(--s)*380) calc(var(--s)*12) minmax(0,1fr); min-height:0; }
+.pane{ position:relative; display:flex; flex-direction:column; min-height:0; overflow:hidden; }
+.rail{ background:var(--panel); border-inline:1px solid var(--hair); display:grid; place-items:center; }
+.rail i{ width:calc(var(--s)*3); height:calc(var(--s)*28); border-radius:9px; background:var(--border); display:block; }
+.row.sel{ background:var(--panel2); box-shadow:inset calc(var(--s)*3) 0 0 var(--accent); }
+
+@media (prefers-reduced-motion: reduce){
+  .glow,.bdot,.wave b,.tap{ animation:none !important; }
+  .glow{ opacity:.6; }
+}
+
+/* ───── 방향 1: 숨결 Ember ───── */
+.d-ember{ --bg:#15120F; --panel:#1C1814; --panel2:#262019; --raised:#221D19; --border:#3A322B; --hair:#2A241F; --text:#EDE6DF; --dim:#A89C91;
+  --accent:#E5484D; --accentTint:rgba(229,72,77,.13); --accentText:#FF8A8D; --onAccent:#fff;
+  --glow:#E5484D; --glowC:#E5484D; --glowWait:#E0A23A; --warn:#E0A23A; --warnTint:rgba(224,162,58,.15); --okc:#8FC98A;
+  --meBg:#E5484D; --meText:#fff; --agBg:#221D19; --agBorder:transparent; --fieldBorder:transparent; --popLine:rgba(255,255,255,.06);
+  --ovBg:rgba(24,20,17,.94); --ovText:#F2EBE4; --ovLine:rgba(229,72,77,.35); --ovBtn:rgba(255,255,255,.1); --accentOnOv:#FF7A7E;
+  --f:"Gothic A1","Apple SD Gothic Neo",system-ui,sans-serif; --fd:"Gothic A1","Apple SD Gothic Neo",system-ui,sans-serif; --fm:"Gothic A1",system-ui,sans-serif;
+  --rc:14; --rsm:10; --rfield:22; --rsheet:26; --rov:20; --rbtn:12;
+  --gw:26; --gspread:4; --gline:0px; --gmin:.25; --gmax:.9; }
+.d-ember .dname{ font-family:"Gothic A1",var(--ui); }
+/* ───── 방향 2: 맑은 창 Clear ───── */
+.d-clear{ --bg:#F3F4F7; --panel:#EBEDF2; --panel2:#E8EAF0; --raised:#FFFFFF; --border:#D8DBE3; --hair:#E2E5EC; --text:#15171C; --dim:#636977;
+  --accent:#2F5BEA; --accentTint:rgba(47,91,234,.09); --accentText:#2F5BEA; --onAccent:#fff;
+  --glow:#F0444A; --glowC:#F0444A; --glowWait:#E59A1A; --warn:#B86E00; --warnTint:#FFF1DC; --okc:#23884F;
+  --meBg:#2F5BEA; --meText:#fff; --agBg:#FFFFFF; --agBorder:transparent; --fieldBorder:#E1E4EB; --popLine:rgba(0,0,0,.04);
+  --ovBg:rgba(255,255,255,.97); --ovText:#15171C; --ovLine:rgba(0,0,0,.08); --ovBtn:#EEF0F4; --accentOnOv:#2F5BEA;
+  --f:"IBM Plex Sans KR","Apple SD Gothic Neo",system-ui,sans-serif; --fd:"Gowun Dodum","IBM Plex Sans KR",system-ui,sans-serif; --fm:"IBM Plex Sans KR",system-ui,sans-serif;
+  --rc:22; --rsm:14; --rfield:24; --rsheet:30; --rov:24; --rbtn:999;
+  --gw:40; --gspread:2; --gline:0px; --gmin:.2; --gmax:.72; }
+.d-clear .dname{ font-family:"Gowun Dodum",var(--ui); font-weight:400; }
+.d-clear .list .row{ background:#fff; margin:0 calc(var(--s)*12) calc(var(--s)*6); border-radius:calc(var(--s)*18); padding:calc(var(--s)*11) calc(var(--s)*12); }
+.d-clear .list .row.run{ background:#EEF2FE; }
+.d-clear .tile{ border-radius:50%; background:#F0F2F7; }
+.d-clear .state{ background:#fff; border:1px solid #E6E9F0; }
+.d-clear .ov{ box-shadow:0 calc(var(--s)*8) calc(var(--s)*24) rgba(20,24,40,.16); }
+.d-clear .ov .bdot{ background:var(--glowC); }
+.d-clear .me{ border-radius:calc(var(--s)*20) calc(var(--s)*20) calc(var(--s)*6) calc(var(--s)*20); }
+.d-clear .ag{ border-radius:calc(var(--s)*20) calc(var(--s)*20) calc(var(--s)*20) calc(var(--s)*6); box-shadow:0 1px 2px rgba(20,24,40,.06); }
+.avatar{ display:flex; flex-direction:column; align-items:center; gap:calc(var(--s)*4); padding:calc(var(--s)*2) 0 calc(var(--s)*10); flex:none; }
+.avatar .face{ width:calc(var(--s)*58); height:calc(var(--s)*58); border-radius:50%; background:radial-gradient(circle at 36% 44%, #15171C 0 4%, transparent 5%), radial-gradient(circle at 64% 44%, #15171C 0 4%, transparent 5%), #FFF; box-shadow:0 0 0 calc(var(--s)*3) #F0444A, 0 0 calc(var(--s)*18) rgba(240,68,74,.45); animation:breathe calc(var(--period)/2) cubic-bezier(.4,0,.2,1) infinite alternate; --gmin:.7; --gmax:1; }
+.avatar .nm{ font-family:var(--fd); font-size:calc(var(--s)*18); }
+.avatar .st{ font-size:calc(var(--s)*12.5); color:var(--dim); display:flex; gap:calc(var(--s)*5); align-items:center; }
+/* ───── 방향 3: 관제 Console ───── */
+.d-console{ --bg:#F7F8F8; --panel:#EFF1F0; --panel2:#E6E9E8; --raised:#FFFFFF; --border:#CCD3D0; --hair:#D9DEDC; --text:#1B1F1E; --dim:#5A6361;
+  --accent:#C8323C; --accentTint:rgba(200,50,60,.09); --accentText:#B0222C; --onAccent:#fff;
+  --glow:#D8343F; --glowC:#D8343F; --glowWait:#B7791F; --warn:#9A6200; --warnTint:rgba(183,121,31,.14); --okc:#1A7F3C;
+  --meBg:rgba(200,50,60,.1); --meText:#1B1F1E; --agBg:#FFFFFF; --agBorder:#D9DEDC; --fieldBorder:#CCD3D0; --popLine:#CCD3D0;
+  --ovBg:rgba(14,17,16,.95); --ovText:#E7ECEA; --ovLine:#2A3230; --ovBtn:#232A28; --accentOnOv:#F07078;
+  --f:"IBM Plex Sans KR","Apple SD Gothic Neo",system-ui,sans-serif; --fd:"IBM Plex Sans KR",system-ui,sans-serif; --fm:"IBM Plex Mono",ui-monospace,monospace;
+  --rc:10; --rsm:8; --rfield:10; --rsheet:14; --rov:12; --rbtn:8;
+  --gw:14; --gspread:1; --gline:1.5px; --gmin:.35; --gmax:1; }
+.d-console .dname{ font-family:"IBM Plex Mono",var(--mono); font-weight:500; letter-spacing:-.02em; }
+.d-console .list .row{ border-bottom:1px solid var(--hair); box-shadow:inset calc(var(--s)*3) 0 0 var(--stripe,transparent); }
+.d-console .row.run{ --stripe:var(--accent); }
+.d-console .row.fail{ --stripe:var(--glowWait); }
+.d-console .rt, .d-console .chd .m, .d-console .src, .d-console .agm{ font-family:var(--fm); }
+.d-console .tile{ background:transparent; border:1px solid var(--border); }
+.d-console .state{ border:1px solid rgba(200,50,60,.35); }
+.d-console .me{ border:1px solid rgba(200,50,60,.25); }
+.d-console .dh{ background:var(--panel); border-block:1px solid var(--hair); text-transform:none; }
+.sum{ display:flex; gap:calc(var(--s)*12); padding:0 calc(var(--s)*16) calc(var(--s)*8); font-family:var(--fm); font-size:calc(var(--s)*11.5); color:var(--dim); flex:none; }
+.sum b{ color:var(--text); font-weight:500; }
+.sum .w{ color:var(--warn); }
+.runid{ font-family:var(--fm); font-size:calc(var(--s)*10); color:var(--dim); }
+
+.foot{ margin-top:56px; padding-top:20px; border-top:1px solid var(--rule); color:var(--muted); font-size:13px; }
+.foot code{ font-family:var(--mono); font-size:12px; }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>폴드 에이전트 — 디자인 방향 3안</h1>
+    <p class="lede">같은 다섯 장면을 세 방향으로 그렸습니다. 다른 앱 위에 뜬 팝업 입력, 조작 중 테두리 빛과 상태 패널, 확인 대기, 홈(작업 기록), 대화방입니다. 폰 틀은 커버 화면 비율(1248×1972), 펼침 예시는 2448×1848입니다. 글자 크기는 dp 기준으로 폰 폭에 맞춰 줄였습니다.</p>
+    <div class="bar" role="group" aria-label="테두리 빛 주기">
+      <b>빛 숨쉬기 주기</b>
+      <span class="seg" id="period">
+        <button type="button" id="p28" data-p="2.8s" aria-pressed="false">2.8초</button>
+        <button type="button" id="p36" data-p="3.6s" aria-pressed="true">3.6초 (추천)</button>
+        <button type="button" id="p44" data-p="4.4s" aria-pressed="false">4.4초</button>
+      </span>
+      <span class="note">한 번 밝아졌다 흐려지는 왕복 시간. 불투명도 곡선 cubic-bezier(.4,0,.2,1). 확인 대기 장면은 숨쉬기를 멈추고 호박색으로 고정됩니다.</span>
+    </div>
+  </header>
+  <main id="dirs"></main>
+  <p class="foot">설계 정본 <code>docs/design/DESIGN.md</code>. 시안 글꼴은 웹 대체(Gothic A1 · IBM Plex Sans KR · Gowun Dodum)이고, 앱에서는 Pretendard를 번들할 예정입니다(결정 7-13). 캘린더·설정·메시지 화면은 에이전트가 조작하는 다른 앱을 흉내 낸 배경입니다.</p>
+</div>
+
+<script>
+(function(){
+const P = {
+  mic:'M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3zM5 11a7 7 0 0 0 14 0M12 18v3',
+  send:'M12 19V5M5 12l7-7 7 7',
+  pin:'M9 3h6l-1 6 3 3H7l3-3zM12 12v9',
+  search:'M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14zM20 20l-4.5-4.5',
+  gear:'M12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1',
+  back:'M15 5l-7 7 7 7',
+  sun:'M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M5 19l1.5-1.5M17.5 6.5L19 5',
+  msg:'M4 5h16v11H9l-5 4z',
+  box:'M3 7l9-4 9 4v10l-9 4-9-4zM3 7l9 4 9-4M12 11v10',
+  map:'M9 4L3 6v14l6-2 6 2 6-2V4l-6 2zM9 4v14M15 6v14',
+  note:'M6 3h9l4 4v14H6zM14 3v5h5M9 12h7M9 16h5',
+  image:'M4 5h16v14H4zM4 16l5-5 4 4 3-3 4 4',
+  plus:'M12 5v14M5 12h14',
+  more:'M12 5.5v.01M12 12v.01M12 18.5v.01',
+  check:'M5 12l5 5 9-10',
+  chev:'M9 6l6 6-6 6',
+  kbd:'M3 6h18v12H3zM7 10h.01M11 10h.01M15 10h.01M7 14h10'
+};
+function ic(n){
+  if(n==='stop') return '<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="6.5" y="6.5" width="11" height="11" rx="2" fill="currentColor"/></svg>';
+  return '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="'+(n==='more'?3:1.8)+'" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="'+P[n]+'"/></svg>';
+}
+const sb = (t)=>'<div class="sb"><span>'+(t||'9:41')+'</span><span class="r"><i></i><i></i></span></div>';
+
+const DIRS = [
+  { id:'ember', no:'방향 1', name:'숨결', en:'Ember', rec:true,
+    line:'따뜻한 먹색 위의 잉걸불. 앱 전체는 평평하고 조용하게 두고, 붉은 빛 하나가 「지금 AI가 폰을 만지고 있다」를 말합니다.',
+    sw:[['바탕','#15120F'],['면','#221D19'],['본문','#EDE6DF'],['키 색 · 빛','#E5484D'],['확인 대기 · 실패','#E0A23A']],
+    type:'Pretendard 한 가족(시안은 Gothic A1). 제목 19 Bold · 카드 제목 14 SemiBold · 본문 13.5 · 보조 11.5',
+    basis:'요구 ②의 붉은 빛을 브랜드 색으로 승격. 참고 앱 원칙 「평평한 면 + 빛만 예외」(research_refapps §9-3). 관제실 Emerald Noir의 명도 구조를 따뜻한 쪽으로. Muse 진행 중 카드의 ■ 정지.',
+    glow:'가장자리 26dp 번짐, 불투명도 .25 ↔ .90', unfold:true },
+  { id:'clear', no:'방향 2', name:'맑은 창', en:'Clear',
+    line:'밝고 둥글고 친근합니다. 에이전트에 얼굴(원형 표식)을 주고, 흰 카드와 코발트 강조로 낮에 읽기 편하게. 빛만 붉습니다.',
+    sw:[['바탕','#F3F4F7'],['카드','#FFFFFF'],['본문','#15171C'],['키 색','#2F5BEA'],['빛','#F0444A']],
+    type:'제목 Gowun Dodum(둥근 인상) · 본문 Pretendard(시안은 IBM Plex Sans KR). 카드 반경 22 · 팝업 30',
+    basis:'Meta Muse 활동 화면(아바타 아래 상태 한 줄, 제목·설명·시각 카드), Muse 결제 승인 카드, Gemini 하단 입력 카드와 제안 칩(research_muse §2·§4).',
+    glow:'가장자리 40dp 넓고 옅게, 불투명도 .20 ↔ .72' },
+  { id:'console', no:'방향 3', name:'관제', en:'Console',
+    line:'정보 밀도가 높은 운영 화면. 1dp 테두리와 왼쪽 상태 띠, 모노 숫자로 「무엇이 몇 단계째 몇 초」인지 늘 보입니다.',
+    sw:[['바탕','#F7F8F8'],['테두리','#CCD3D0'],['본문','#1B1F1E'],['키 색 · 빛','#C8323C'],['확인 대기','#B7791F']],
+    type:'Pretendard + 모노(실행 id·시간·단계). 시안은 IBM Plex Sans KR · IBM Plex Mono. 반경 8~12',
+    basis:'cmux 관제실의 상태 = 면 물들이기, 「나를 기다림」 요약 줄, 카드 왼쪽 3dp 띠. Claude 기록 앱의 목록 줄과 날짜 머리(research_refapps §2·§7).',
+    glow:'가장자리 14dp 얇고 선명 + 1.5dp 선, 불투명도 .35 ↔ 1.0' }
+];
+
+const ROWS = [
+  {h:'오늘'},
+  {ic:'sun', t:'화면 밝기 40%로 낮추기', d:'설정 › 디스플레이에서 밝기 막대를 옮기는 중', time:'오후 9:41', st:'run', id:'0926-214102'},
+  {ic:'msg', t:'엄마에게 도착 문자', d:'「오늘 7시쯤 도착해요」를 보냈어요 · 확인 1회', time:'오후 9:12', pin:true, turns:2, id:'0926-211208'},
+  {ic:'box', t:'쿠팡 주문 3건 배송 조회', d:'3건 모두 내일(9/27 토) 도착 예정이에요', time:'오후 8:30', id:'0926-203011'},
+  {ic:'map', t:'TMAP 서울역까지 길찾기', d:'출발지 「회사」를 찾지 못해 멈췄어요', time:'오후 7:05', st:'fail', id:'0926-190533'},
+  {h:'어제'},
+  {ic:'note', t:'주간회의 메모 이어쓰기', d:'삼성 노트 「9월 주간회의」 끝에 두 문단을 붙였어요', time:'어제', turns:3, id:'0925-172240'},
+  {ic:'image', t:'단체방 사진 저장', d:'4단계에서 사용자가 멈췄어요', time:'어제', st:'cancel', id:'0925-120914'}
+];
+
+function rows(d, opt){
+  opt = opt||{};
+  return ROWS.map(r=>{
+    if(r.h) return '<div class="dh">'+r.h+'</div>';
+    const cls = ['row']; if(r.st==='run') cls.push('run'); if(r.st==='fail') cls.push('fail'); if(opt.sel && r.pin) cls.push('sel');
+    let right;
+    if(r.st==='run') right = '<div class="stopc sm" aria-label="정지">'+ic('stop')+'</div>';
+    else {
+      let flags = '';
+      if(r.st==='fail') flags += '<span class="stt fail">실패</span>';
+      if(r.st==='cancel') flags += '<span class="stt cancel">멈춤</span>';
+      if(r.turns) flags += '<span class="pill">'+r.turns+'턴</span>';
+      if(r.pin) flags += '<span class="pin">'+ic('pin')+'</span>';
+      right = '<div class="rt"><span>'+r.time+'</span><span class="flags">'+flags+'</span></div>';
+    }
+    const idl = d.id==='console' ? '<div class="runid">'+r.id+(r.st==='run'?' · 3/8단계 · 12s':'')+'</div>' : '';
+    return '<div class="'+cls.join(' ')+'"><div class="tile">'+ic(r.ic)+'</div><div><div class="t1">'+r.t+'</div><div class="t2">'+r.d+'</div>'+idl+'</div>'+right+'</div>';
+  }).join('');
+}
+
+function homeInner(d, opt){
+  opt = opt||{};
+  let top = '<div class="hd"><div class="brand"><span class="mark"></span>폴드 에이전트</div><div class="ib">'+ic('search')+'</div><div class="ib">'+ic('plus')+'</div><div class="ib">'+ic('gear')+'</div></div>';
+  let state;
+  if(d.id==='clear'){
+    state = '<div class="avatar"><div class="face"></div><div class="nm">에이전트</div><div class="st"><span class="bdot"></span>화면 밝기 낮추는 중 · 3/8단계</div></div>';
+  } else {
+    state = '<div class="state"><span class="bdot"></span><div class="tx"><div class="a">화면 밝기 40%로 낮추는 중</div><div class="b">3/8단계 · 12초 · 설정 › 디스플레이</div></div><div class="stopc" aria-label="정지">'+ic('stop')+'</div></div>';
+  }
+  const sum = d.id==='console' ? '<div class="sum"><span>진행 <b>1</b></span><span>확인 대기 <b>0</b></span><span>오늘 <b>4</b></span><span class="w">실패 1</span></div>' : '';
+  const chips = '<div class="chips"><span class="chip on">전체</span><span class="chip">오늘</span><span class="chip">고정</span><span class="chip">실패</span><span class="chip">보관함</span><span class="chip">휴지통</span></div>';
+  const comp = opt.noComposer ? '' : '<div class="composer"><div class="field">무엇을 해 드릴까요?</div><div class="cbtn">'+ic('mic')+'</div><div class="cbtn">'+ic('send')+'</div></div>';
+  return top + (d.id==='console' ? state + sum : state) + chips + '<div class="list">'+rows(d, opt)+'</div>' + comp;
+}
+
+function chatInner(d, opt){
+  opt = opt||{};
+  const back = opt.noBack ? '' : '<div class="ib">'+ic('back')+'</div>';
+  return '<div class="chd">'+back+'<div class="tt"><div class="t">엄마에게 도착 문자</div><div class="m">오늘 오후 9:12 · 음성 · 2턴 · 41초</div></div><div class="ib">'+ic('more')+'</div></div>'+
+  '<div class="msgs">'+
+    '<div class="me">엄마한테 7시쯤 도착한다고 문자 보내 줘</div>'+
+    '<div class="src">'+ic('mic')+'음성 · 9:12</div>'+
+    '<div class="steps">단계 6개 · 메시지 열기 · 탭 ×3 · 입력 '+ic('chev')+'</div>'+
+    '<div class="cf">확인 · 엄마에게 문자 보내기 → <b>실행함</b> 9:13</div>'+
+    '<div class="ag">엄마에게 「오늘 7시쯤 도착해요」를 보냈어요.</div>'+
+    '<div class="agm"><span class="ok">완료</span> · 29초 · <span class="rb on">잘했어</span></div>'+
+    '<div class="sep">오후 9:15</div>'+
+    '<div class="me">기차 타고 간다고도 덧붙여 줘</div>'+
+    '<div class="src">'+ic('kbd')+'입력 · 9:15</div>'+
+    '<div class="steps">단계 3개 · 입력칸 탭 · 입력 · 보내기 '+ic('chev')+'</div>'+
+    '<div class="cf">확인 · 엄마에게 문자 보내기 → <b>실행함</b> 9:15</div>'+
+    '<div class="ag">「기차 타고 가요」를 이어서 보냈어요.</div>'+
+    '<div class="agm"><span class="ok">완료</span> · 12초 · <span class="rb">잘했어</span><span class="rb">틀렸어</span></div>'+
+  '</div>'+
+  '<div class="composer"><div class="field">이어서 시키기…</div><div class="cbtn">'+ic('mic')+'</div><div class="cbtn">'+ic('send')+'</div></div>';
+}
+
+function framePopup(d){
+  return '<div class="app sys">'+sb()+
+    '<div class="sysh">9월 27일 토요일</div>'+
+    '<div class="cal">'+
+      '<div class="day"><b>오전 7:00</b><div class="ev">기상 · 운동<small>반복 · 평일</small></div></div>'+
+      '<div class="day"><b>오전 10:30</b><div class="ev g">고객사 화상 미팅<small>화상 · 45분</small></div></div>'+
+      '<div class="day"><b>오후 2:00</b><div class="ev">주간 회의 녹화<small>스튜디오</small></div></div>'+
+      '<div class="day"><b>오후 7:00</b><div class="ev g">부모님 댁 저녁<small>서울역 → 대전</small></div></div>'+
+    '</div>'+
+    '<div class="navb" style="color:#1C1C1E"></div>'+
+  '</div>'+
+  '<div class="app '+'d-'+d.id+'" style="background:transparent;pointer-events:none">'+
+    '<div class="pop">'+
+      '<div class="chips"><span class="chip">방금 한 일 이어서 · 엄마에게 도착 문자</span><span class="chip">밝기 40%로</span></div>'+
+      '<div class="inrow"><span class="mark"></span><div class="heard"><div class="wave"><b></b><b></b><b></b><b></b><b></b><b></b><b></b></div>내일 아침 7시에 알람 <i>맞춰 줘…</i></div><div class="cbtn mic live">'+ic('mic')+'</div><div class="cbtn go">'+ic('send')+'</div></div>'+
+      '<div class="hint"><span>측면 버튼을 다시 누르면 말하기 끝</span><span>기록 보기 ›</span></div>'+
+    '</div>'+
+  '</div>';
+}
+
+function frameGlow(d){
+  return '<div class="app sys">'+sb()+
+    '<div class="sysh">디스플레이</div>'+
+    '<div class="sysg"><div class="sysr">다크 모드<span class="tog"></span></div><div class="sysr">밝기<span style="font-size:.8em;color:#6E6E73">40%</span></div><div class="sld"></div><div class="sysr">밝기 자동 조절<span class="tog on"></span></div></div>'+
+    '<div class="sysg"><div class="sysr"><span>화면 모드<small>선명한 화면</small></span></div><div class="sysr">부드러운 화면 전환<span class="tog on"></span></div><div class="sysr"><span>글자 크기와 스타일</span></div></div>'+
+    '<div class="navb" style="color:#1C1C1E"></div>'+
+  '</div>'+
+  '<div class="app d-'+d.id+'" style="background:transparent">'+
+    '<div class="glow"></div>'+
+    '<span class="tap" style="left:40%;top:40.2%"></span>'+
+    '<div class="ov"><span class="bdot"></span><div class="tx"><div class="a">밝기 막대를 40%로 옮기는 중</div><div class="b">설정 › 디스플레이 · 3/8단계 · 12초</div></div><div class="stopp">'+ic('stop')+'정지</div></div>'+
+  '</div>';
+}
+
+function frameWait(d){
+  return '<div class="app sys" style="background:#B2C7DA">'+sb()+
+    '<div style="padding:calc(var(--s)*8) calc(var(--s)*18);font-size:calc(var(--s)*17);font-weight:600;background:#B2C7DA">엄마</div>'+
+    '<div class="msgcol"><div class="bub l">언제 와?</div><div class="bub r">곧 출발해요</div></div>'+
+    '<div class="typed">오늘 7시쯤 도착해요<i>전송</i></div>'+
+    '<div class="navb" style="color:#1C1C1E"></div>'+
+  '</div>'+
+  '<div class="app d-'+d.id+'" style="background:transparent">'+
+    '<div class="glow wait"></div>'+
+    '<div class="ov ask">'+
+      '<div class="h"><span class="bdot"></span>보내기 전에 확인할게요</div>'+
+      '<div class="kv"><span>할 일</span><b>문자 보내기</b><span>받는 사람</span><b>엄마</b><span>내용</span><b>「오늘 7시쯤 도착해요」</b></div>'+
+      '<div class="timer"><i></i></div>'+
+      '<div class="tl">32초 뒤 자동으로 취소해요 · 정지를 눌러도 취소</div>'+
+      '<div class="btns"><div class="no">취소</div><div class="yes">보내기 실행</div></div>'+
+    '</div>'+
+  '</div>';
+}
+
+function frameHome(d){ return '<div class="app d-'+d.id+'">'+sb()+homeInner(d)+'<div class="navb"></div></div>'; }
+function frameChat(d){ return '<div class="app d-'+d.id+'">'+sb()+chatInner(d)+'<div class="navb"></div></div>'; }
+function frameUnfold(d){
+  return '<div class="app d-'+d.id+'">'+sb()+
+    '<div class="panes"><div class="pane">'+homeInner(d,{sel:true, noComposer:true})+'</div><div class="rail"><i></i></div><div class="pane">'+chatInner(d,{noBack:true})+'</div></div>'+
+    '<div class="navb"></div></div>';
+}
+
+const FR = [
+  ['① 팝업 입력 — 캘린더 앱 위','측면 버튼 길게. 앱으로 가지 않고 아래 카드만 뜹니다. 자동으로 듣고, 부분 결과가 바로 보입니다.', framePopup],
+  ['② 조작 중 — 테두리 빛 + 상태 패널','빛은 터치를 받지 않는 별도 창. 탭 표시는 에이전트가 누르는 자리. 정지는 항상 패널에 있습니다.', frameGlow],
+  ['②′ 확인 대기 — 발송 게이트','숨쉬기를 멈추고 호박색으로 고정. 취소가 넓고 실행은 테두리만. 40초 무응답이면 거부합니다.', frameWait],
+  ['③ 홈 · 작업 기록','상태 카드 + 날짜별 목록. 줄마다 제목·설명·일시, 진행 중 줄은 물들이고 ■ 정지. 길게 눌러 이름 바꾸기·고정·보관·휴지통.', frameHome],
+  ['④ 대화방','요청은 오른쪽, 결과는 왼쪽. 단계는 한 줄로 접고, 확인 게이트를 지난 기록은 점선 칩으로 남깁니다.', frameChat]
+];
+
+const out = DIRS.map(d=>{
+  const sw = d.sw.map(s=>'<span><i style="background:'+s[1]+'"></i>'+s[0]+' <code>'+s[1]+'</code></span>').join('');
+  const figs = FR.map(f=>'<figure><div class="phone"><div class="scr">'+f[2](d)+'</div></div><figcaption><b>'+f[0]+'</b><span>'+f[1]+'</span></figcaption></figure>').join('');
+  const wide = d.unfold ? '<figure class="wide"><div class="phone"><div class="scr wd">'+frameUnfold(d)+'</div></div><figcaption><b>펼침 화면 — 목록 | 대화방 2칸</b><span>폭 600dp 이상이면 목록 380dp와 대화방을 나란히. 가운데 레일을 끌어 폭을 바꾸고, 폭은 자세별로 저장합니다.</span></figcaption></figure>' : '';
+  return '<section class="dir d-'+d.id+'-head" id="'+d.id+'"><div class="dhead"><div><div class="dno">'+d.no+'</div><h2 class="dname">'+d.name+' <small>'+d.en+'</small>'+(d.rec?'<span class="rec">추천</span>':'')+'</h2><p class="dline">'+d.line+'</p></div>'+
+    '<div><div class="sw">'+sw+'</div><dl class="meta"><dt>글꼴</dt><dd>'+d.type+'</dd><dt>빛</dt><dd>'+d.glow+'</dd><dt>근거</dt><dd>'+d.basis+'</dd></dl></div></div>'+
+    '<div class="phones">'+figs+wide+'</div></section>';
+}).join('');
+document.getElementById('dirs').innerHTML = out;
+document.querySelectorAll('.d-ember-head .dname').forEach(e=>e.style.fontFamily='"Gothic A1",'+getComputedStyle(document.body).fontFamily);
+document.querySelectorAll('.d-clear-head .dname').forEach(e=>{e.style.fontFamily='"Gowun Dodum",sans-serif';e.style.fontWeight='400';});
+document.querySelectorAll('.d-console-head .dname').forEach(e=>{e.style.fontFamily='"IBM Plex Mono",monospace';e.style.fontWeight='500';});
+
+const btns = document.querySelectorAll('#period button');
+function setP(v){
+  document.documentElement.style.setProperty('--period', v);
+  btns.forEach(b=>b.setAttribute('aria-pressed', String(b.dataset.p===v)));
+  try{ localStorage.setItem('fa-period', v); }catch(e){}
+}
+btns.forEach(b=>b.addEventListener('click',()=>setP(b.dataset.p)));
+try{ const s = localStorage.getItem('fa-period'); if(s && ['2.8s','3.6s','4.4s'].includes(s)) setP(s); }catch(e){}
+})();
+</script>

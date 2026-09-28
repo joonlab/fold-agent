@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 생성물(준랩 폴드 패밀리 아이콘 생성기, 이 저장소에는 없음) — 손으로 고치기보다 생성기를 고친다 -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="108dp" android:height="108dp"
+    android:viewportWidth="108" android:viewportHeight="108">
+    <group android:pivotX="54" android:pivotY="54" android:scaleX="0.740" android:scaleY="0.740">
+    <path android:pathData="M31,56 a23,23 0 0 0 46,0" android:strokeColor="#FFFFFF" android:strokeWidth="6.2" android:strokeLineCap="round" android:strokeLineJoin="round" />
+    <path android:pathData="M42,56 a12,12 0 0 0 24,0" android:strokeColor="#FFFFFF" android:strokeWidth="6.2" android:strokeLineCap="round" android:strokeLineJoin="round" />
+    <path android:pathData="M54,24 C55.6,36.5 58.5,39.4 71,41 C58.5,42.6 55.6,45.5 54,58 C52.4,45.5 49.5,42.6 37,41 C49.5,39.4 52.4,36.5 54,24 z" android:fillColor="#FFFFFF" />
+    </group>
+</vector>

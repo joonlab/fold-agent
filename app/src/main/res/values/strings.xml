@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="a11y_desc">음성으로 받은 요청을 수행하려고 화면 내용을 읽고 탭·입력·스크롤을 대신합니다. 발송·결제·삭제처럼 되돌릴 수 없는 동작은 실행 전에 확인을 받습니다.</string>
+</resources>
