@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="_app.css">
 <style>
   .layout { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 34px; }
-  .mac-col { width: 420px; display: flex; flex-direction: column; }
+  .mac-col { width: 372px; display: flex; flex-direction: column; }
   .conv .list-row .meta { font-size: 12px; }
   .pane.room { display: flex; flex-direction: column; gap: 10px; }
 </style>
@@ -17,7 +17,7 @@
 
     <!-- 펼친 화면: 대시보드(대화 목록 + 대화방) -->
     <div>
-      <div class="fold-open" style="--zoom:.76">
+      <div class="fold-open" style="--zoom:.7">
         <div class="screen">
           <div class="status-bar" data-time="7:42"></div>
           <div class="app-bar">
@@ -28,7 +28,7 @@
             <span class="icon-btn"><i data-icon="search"></i></span>
             <span class="icon-btn"><i data-icon="settings"></i></span>
           </div>
-          <div class="two-pane list-detail">
+          <div class="two-pane">
             <div class="pane conv">
               <div class="chips"><span class="chip on">대화</span><span class="chip">보관</span><span class="chip">휴지통</span></div>
               <div class="section-label">오늘</div>
@@ -71,7 +71,7 @@
 
     <!-- 커버: 다른 앱 위에서 일하는 중 -->
     <div>
-      <div class="fold-cover" style="--zoom:.76">
+      <div class="fold-cover" style="--zoom:.7">
         <div class="screen">
           <div class="status-bar" data-time="7:42"></div>
           <div class="fake-app dim-app" style="top:32px">
