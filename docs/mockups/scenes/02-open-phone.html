@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="shot" content="w=600,h=584,scale=3">
+<title>장면 2 — 펼친 화면의 원격 확인</title>
+<link rel="stylesheet" href="https://mockup-kit.invalid/kit.css">
+<script src="https://mockup-kit.invalid/kit.js"></script>
+<link rel="stylesheet" href="../_app.css">
+<link rel="stylesheet" href="_scene.css">
+<style>
+  .two-pane.list-detail { grid-template-columns: 200px 1fr; }
+  .pane.room { display: flex; flex-direction: column; gap: 10px; }
+  .confirm-card .cc-title { font-size: 19px; }
+  .confirm-card .cc-mono { font-size: 14px; line-height: 21px; }
+  .list-row .card-title { font-size: 14.5px; }
+</style>
+</head><body>
+<div class="canvas scr app-foldagent big" style="--cw:600px; --ch:584px">
+  <div class="screen">
+    <div class="status-bar" data-time="3:12"></div>
+    <div class="app-bar">
+      <img class="mark" data-app="foldagent" alt="">
+      <span class="title">폴드 에이전트</span>
+      <span class="status"><span class="pulse amber"></span>확인 대기</span>
+      <span class="spacer"></span>
+    </div>
+    <div class="two-pane list-detail">
+      <div class="pane">
+        <div class="section-label">맡긴 일</div>
+        <div class="list">
+          <div class="list-row selected"><div class="grow"><div class="card-title ellipsis">회의 메모 요약</div><div class="meta ellipsis">claude_task · 확인 대기</div></div></div>
+          <div class="list-row"><div class="grow"><div class="card-title ellipsis">할 일 3개 엑셀로</div><div class="meta ellipsis">code_run · 끝남</div></div></div>
+          <div class="list-row"><div class="grow"><div class="card-title ellipsis">이번 주 전시 찾기</div><div class="meta ellipsis">web_search · 끝남</div></div></div>
+        </div>
+      </div>
+      <div class="pane room">
+        <div class="msg me">홈 서버 Claude Code 에 맡겨 줘: 회의 메모 요약해서 memo.md 로</div>
+        <div class="card confirm-card raised">
+          <div class="cc-head"><i data-icon="terminal"></i><span>홈 서버 Claude Code 가 하려는 동작</span></div>
+          <div class="cc-title">Write · memo.md</div>
+          <div class="cc-body cc-mono"># 회의 메모 요약
+- 발표 순서: 민지 → 서준
+- 자료 마감: 목요일 저녁</div>
+          <div class="row gap-8">
+            <span class="btn btn-primary grow" style="justify-content:center">거부</span>
+            <span class="btn btn-outline-accent grow" style="justify-content:center">허용</span>
+          </div>
+          <div class="meta">작업 폴더 안 · 남은 대기 9분 40초<br>발송·삭제는 서버가 늘 차단</div>
+        </div>
+      </div>
+    </div>
+    <div class="input-bar">
+      <div class="input placeholder">말하거나 입력하세요…</div>
+      <span class="send-btn"><i data-icon="mic"></i></span>
+    </div>
+    <div class="edge-glow amber"></div>
+  </div>
+</div>
+</body></html>

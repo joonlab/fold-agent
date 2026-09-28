@@ -9,3 +9,7 @@ node android-mac-lab/mockup-kit/shot.mjs --batch docs/mockups   # → docs/image
 ```
 
 킷 사용법: https://github.com/joonlab/android-mac-lab/tree/main/mockup-kit
+
+## 책상 장면(`scenes/`)
+
+`docs/images/scenes/*.jpg` 는 AI 로 만든 책상 사진(화면 자리는 크로마키 초록)에 `scenes/*.html` 을 렌더해 원근 합성한 것입니다. 합성하면 화면이 작아지므로 캔버스를 작게 잡고 `scale` 을 키워 렌더합니다(= 글자를 평소보다 크게). 배경 사진과 합성 스크립트는 이 저장소에 넣지 않았습니다.

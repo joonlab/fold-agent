@@ -1,0 +1,33 @@
+/* 책상 사진 합성용 화면 — 캔버스 전체가 곧 기기 화면이다(프레임 없음).
+   합성되면 화면이 수백 px 로 줄어들므로 캔버스를 작게 잡고 --scale 로 키워 렌더한다(= UI 를 크게). */
+.canvas.scr { background: var(--bg); }
+.canvas.scr > .screen { position: absolute; inset: 0; border-radius: 0; }
+.canvas.scr .edge-glow { border-radius: 0; }
+
+/* 맥 데스크톱 */
+.canvas.desktop { background: linear-gradient(150deg, #C9D6E3 0%, #E7D9CC 55%, #D9C3B3 100%); }
+.canvas.desktop > .mac-menubar { height: 28px; font-size: 13px; }
+.canvas.desktop .mac-window, .canvas.desktop .terminal { position: absolute; }
+
+/* 크게 쓰는 폰 부품 */
+.big .rp-line { font-size: 17px; line-height: 24px; }
+.big .rp-head { font-size: 14px; }
+.big .run-panel .btn { font-size: 15px; }
+.big .step { font-size: 15px; line-height: 22px; }
+.big .step .n { width: 22px; height: 22px; line-height: 22px; font-size: 12px; }
+.big .msg { font-size: 16px; line-height: 23px; max-width: 88%; }
+
+/* 메시지 앱 흉내(뒤에 깔린 다른 앱) */
+.fake-app .bub { margin: 6px 14px; padding: 9px 13px; border-radius: 16px; background: var(--panel2); font-size: 15.5px; line-height: 22px; max-width: 78%; align-self: flex-start; }
+.fake-app .bub.me { align-self: flex-end; background: var(--panel); border: 1px solid var(--border); }
+.fake-app .day { text-align: center; font-size: 12.5px; color: var(--dim); margin: 10px 0 4px; }
+.fake-app .ava { width: 30px; height: 30px; border-radius: 50%; background: var(--panel2); display: inline-flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; }
+
+/* 맥 문서 창 */
+.doc { padding: 22px 26px; font-size: 16px; line-height: 27px; color: var(--mac-text); }
+.doc h3 { margin: 0 0 10px; font-size: 21px; line-height: 28px; }
+.doc .li { padding-left: 16px; position: relative; }
+.doc .li::before { content: ""; position: absolute; left: 2px; top: 12px; width: 5px; height: 5px; border-radius: 50%; background: var(--mac-dim); }
+.doc .caret { display: inline-block; width: 2px; height: 19px; vertical-align: -3px; background: var(--mac-hl); }
+/* 다른 앱이 absolute 로 깔린 화면에서 홈 막대를 맨 아래에 고정 */
+.canvas.scr .nav-handle.pin { position: absolute; left: 0; right: 0; bottom: 0; z-index: 50; }
