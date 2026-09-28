@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter
 import java.util.Locale
 
 /**
- * 홈 비서 도구 — 폰 화면을 거치지 않고 홈맥(:3100 /api/phone)의 결정적 라우트를 부른다. 계약 docs/server-contract/CONTRACT.md §1·§3.
+ * 홈 비서 도구 — 폰 화면을 거치지 않고 홈 서버(/api/phone)의 결정적 라우트를 부른다. 계약 docs/server-contract/CONTRACT.md §1·§3.
  *
  * 여기는 문자열·JSON 만 만든다(부수효과 없음): 도구 스키마 · op 조립과 인자 검증 · 확인 창 문구 · 거부 키 · 결과 요약 · 상태 문구.
  * 실행 흐름(게이트·confirmId·결과 규약)은 Agent.assistantTool() 이 가진다.

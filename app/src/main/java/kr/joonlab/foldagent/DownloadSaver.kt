@@ -18,7 +18,7 @@ import java.io.InputStream
  *
  * MIME 은 확장자로 정한다: MediaStore 는 이름의 확장자와 MIME 이 어긋나면 맞는 확장자를 덧붙인다(docx 를 zip 으로 주면 「…docx.zip」).
  * MimeTypeMap 이 모르는 한글 문서 등은 직접 매핑, 그래도 모르면 octet-stream(이 경우 이름을 그대로 둔다).
- * (PKM android_mac-to-phone-push-traps_260921 함정 1)
+ * (개인 실측 메모 2026-09-21 함정 1)
  */
 object DownloadSaver {
 

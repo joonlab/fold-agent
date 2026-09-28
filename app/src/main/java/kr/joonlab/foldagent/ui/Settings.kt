@@ -191,7 +191,7 @@ fun SettingsPane(st: AppState, showBack: Boolean, modifier: Modifier = Modifier)
             }
 
             SectionHead("홈 비서")
-            Text("홈맥의 일정·메일·기억·브리핑을 부르는 연결입니다. 토큰은 홈맥 web/.env.local 의 PHONE_API_TOKEN.",
+            Text("홈맥의 일정·메일·기억·브리핑을 부르는 연결입니다. 토큰은 홈 서버에 설정한 PHONE_API_TOKEN 값입니다(docs/server-contract).",
                 color = C.dim, fontSize = 12.sp, lineHeight = 17.sp)
             Field("주소(/api/phone 까지)", aBase) { aBase = it }
             Field("토큰(저장된 것: $aTokenSaved — 바꿀 때만 입력)", aTokenInput, secret = true) { aTokenInput = it }

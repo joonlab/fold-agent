@@ -9,7 +9,7 @@ import org.json.JSONObject
  * 계약 docs/server-contract/CONTRACT.md §1-2 · §1-3.
  *
  * P0 결선(스키마·PROMPT·gateTarget) + W-P2 본 구현(op 검증·정규화 · confirmText 머리 · format 결과 글 · attachments 서버 파일 받기 · summarize·status).
- * 서버 data 모양은 web/lib/phone/types.ts(홈맥) 기준 — 계약 요약과 키 이름이 조금 다른 곳(exit↔exitCode·name↔server·policy↔rules)은 둘 다 읽는다.
+ * 서버 data 모양은 홈 서버 구현 기준 — 계약 요약과 키 이름이 조금 다른 곳(exit↔exitCode·name↔server·policy↔rules)은 둘 다 읽는다.
  * 실행 흐름(need_confirm 2단·거부·결과 불명·맡김·job 등록·첨부 모으기)은 Agent.capTool() 이 가진다 — 여기는 부수효과 없는 글·JSON 만.
  * (예외: attachments 는 서버 파일을 받아 저장하므로 부수효과가 있다 — Agent 가 성공 결과에서만 부른다)
  */

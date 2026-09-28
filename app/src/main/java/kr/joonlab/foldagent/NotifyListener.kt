@@ -18,7 +18,7 @@ import java.util.Locale
  *   - 지금 알림창에 남은 것(getActiveNotifications)
  *   - 이 앱이 켜진 뒤 받은 것 메모리 버퍼(최대 [MAX]) — 지워진 알림도 남는다. 앱이 다시 시작되면 비는 게 정상(디스크에 안 쓴다)
  * 빼는 것: 진행 중(ONGOING — 음악·다운로드) · 묶음 머리글(GROUP_SUMMARY) · 우리 앱 · 30초 안 같은 내용(진행률·재게시).
- * (필터 기준은 clipbridge NotifyMirror 실측 — PKM android_notification-sms-mirror-to-mac_260922)
+ * (필터 기준은 clipbridge NotifyMirror 실측)
  *
  * 🔒 알림에는 카톡 대화·OTP 가 흐른다 — 본문은 모델에게 돌려줄 결과 글에만. logcat·trace·recipes 에는 건수만(Agent 가 그렇게 기록한다).
  */

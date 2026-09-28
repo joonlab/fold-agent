@@ -283,7 +283,7 @@ class AssistantClient(base: String, private val token: String) {
             403 -> "not_allowed"
             404 -> "unreachable"            // 라우트가 없다 = 주소가 틀렸거나 서버가 아직 배포 전
             408, 504 -> "timeout"
-            502 -> "unreachable"            // tailscale serve 뒤 서버(:3100)가 꺼져 있으면 502 가 본문 없이 온다
+            502 -> "unreachable"            // 역방향 프록시 뒤 서버가 꺼져 있으면 502 가 본문 없이 온다
             503 -> "not_configured"
             else -> if (http >= 500) "server_error" else "exec_failed"
         }

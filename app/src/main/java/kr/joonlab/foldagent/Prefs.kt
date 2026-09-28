@@ -101,9 +101,9 @@ object Prefs {
     fun panelLingerSec(c: Context) = sp(c).getInt("panelLingerSec", 10)
     fun setPanelLingerSec(c: Context, v: Int) = sp(c).edit().putInt("panelLingerSec", v).apply()
 
-    // ---- 홈 비서(홈맥 :3100 /api/phone) — 계약 docs/server-contract/CONTRACT.md §2-1·§3
+    // ---- 홈 비서(홈 서버 /api/phone) — 계약 docs/server-contract/CONTRACT.md §2-1·§3
 
-    /** 홈맥 폰 전용 라우트 주소(tailscale serve HTTPS). 끝 「/」는 뺀다 */
+    /** 홈 서버 폰 전용 라우트 주소(https). 끝 「/」는 뺀다 */
     fun assistantBase(c: Context) = sp(c).getString("assistantBase", DEFAULT_ASSISTANT_BASE)!!.ifBlank { DEFAULT_ASSISTANT_BASE }
     fun setAssistantBase(c: Context, v: String) = sp(c).edit().putString("assistantBase", v.trim().trimEnd('/').ifEmpty { DEFAULT_ASSISTANT_BASE }).apply()
 

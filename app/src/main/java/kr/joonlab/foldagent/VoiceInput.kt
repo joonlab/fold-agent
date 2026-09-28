@@ -63,7 +63,7 @@ class VoiceInput(private val ctx: Context, private val cb: Callback) {
     private val relistenRunnable = Runnable { if (sessionActive && !finishing) listen() }
 
     // 온디바이스 먹통 감지 — com.google.android.as 가 마이크는 열고 SODA 가 안 붙으면 ready 만 오고 RMS 가 0 이다
-    // (PKM 13_Troubleshooting/android_ondevice-speechrecognizer-ready-no-rms-soda_260923, foldlab Dictation.kt 와 같은 판정).
+    // (개인 실측 메모 2026-09-23, 참고 앱 Dictation.kt 와 같은 판정).
     // 건강하면 첫 RMS 가 ~0.8초. 2초 안에 소리 신호가 없으면 먹통으로 보고 일반 엔진으로 내려가 60초 기억한다.
     private var heardAudio = false
     private var noOnDeviceUntil = 0L

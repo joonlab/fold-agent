@@ -24,7 +24,7 @@ import java.util.TimeZone
 import java.util.concurrent.atomic.AtomicBoolean
 
 /**
- * 직접 도구 — 폰이 :8531(Prefs.base) `/v1/responses` 에 `Prefs.oaiToolModel`(기본 gpt-5.5)로 바로 부른다.
+ * 직접 도구 — 폰이 LLM 주소(Prefs.base) `/v1/responses` 에 `Prefs.oaiToolModel`(기본 gpt-5.5)로 바로 부른다.
  * 계약 docs/server-contract/CONTRACT.md §1-1 · §1-3.
  *
  * 스키마(TOOLS·NAMES)·PROMPT·summarize·status 는 P0, 실행(exec)·SSE·첨부는 W-P1.
@@ -187,7 +187,7 @@ object OaiTools {
     /**
      * 스트림 하나의 결과. images = image_generation_call.result(base64).
      * 출처: cited = 답이 인용한 것(url_citation 주석 + 답 속 마크다운 링크) · sources = 검색이 본 페이지(web_search_call.action.sources).
-     * 2026-09-27 실측(:8531 프록시·gpt-5.5): url_citation 주석은 오지 않고 인용은 답 속 `[이름](url)` 로만 왔다. sources 는 include 를 줘야 온다.
+     * 2026-09-27 실측(OpenAI 호환 프록시·gpt-5.5): url_citation 주석은 오지 않고 인용은 답 속 `[이름](url)` 로만 왔다. sources 는 include 를 줘야 온다.
      */
     private class Out {
         val text = StringBuilder()

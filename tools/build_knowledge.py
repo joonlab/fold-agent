@@ -177,7 +177,7 @@ K = [
     "## 기기",
     "- Galaxy Z Fold8(SM-F971N) · Android 17 · One UI 9.0. 접힌 상태(커버 화면)로 쓰는 일이 많다 — 화면이 좁아 목록이 잘릴 수 있으니 scroll 로 확인.",
 ] + [f"- {clip(f, 150)}" for f in sysd["oneui_facts"] if "스와이프 제스처가 없어" not in f][:5] + [
-    # 맥 스킬·PKM 실측에서 옮김(2026-09-28, foldphone references·android_oneui-wallpaper…)
+    # 개인 실측 메모에서 옮김(2026-09-28)
     "- 메인 화면 배경·잠금화면·루틴의 「(메인 화면)」 동작은 접힌 상태에선 회색(「커버 화면에서는 추가할 수 없어요」) — 펼쳐 달라고 말하고 멈춘다. 배경화면 및 스타일도 지금 켜진 화면만 바꾼다",
     "- 커버 화면과 메인 화면의 홈 배치는 따로다 — 한쪽에 둔 앱·폴더는 다른 쪽에 안 생긴다. 어느 쪽인지는 [현재 화면]의 접힘/펼침으로",
 ] + [
@@ -221,7 +221,7 @@ SUPERSEDED = [
 # 줄 안의 일부만 바꿀 것
 SUPERSEDED_PART = [
     ("와이파이 켜줘 / 꺼줘=panel.action.WIFI", "와이파이 켜줘(끄기는 안 함)=panel.action.WIFI"),
-    # WALLPAPER_SETTINGS 는 「열린다」까지만 검증됐다 — 삼성 화면이 아니라 AOSP 선택기(Choose wallpaper from)를 연다(PKM android_oneui-wallpaper… 함정 6, 2026-09-28)
+    # WALLPAPER_SETTINGS 는 「열린다」까지만 검증됐다 — 삼성 화면이 아니라 AOSP 선택기(Choose wallpaper from)를 연다(개인 실측 메모 함정 6, 2026-09-28)
     ("배경화면 바꾸기=WALLPAPER_SETTINGS", "배경화면=WALLPAPER_SETTINGS 쓰지 않음(AOSP 선택기) — 사진은 갤러리 그 사진→옵션 더보기→배경화면으로 설정, 동영상·스타일은 설정 앱→배경화면 및 스타일"),
 ]
 for old, new in SUPERSEDED_PART:
