@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="shot" content="w=1280,h=720,scale=2">
+<title>폴드 에이전트 영상 포스터</title>
+<link rel="stylesheet" href="https://mockup-kit.invalid/kit.css">
+<script src="https://mockup-kit.invalid/kit.js"></script>
+<link rel="stylesheet" href="_app.css">
+<style>
+  .canvas.poster { --cw: 1280px; --ch: 720px; }
+  .lefty { position:absolute; left:92px; top:0; bottom:0; width:620px; display:flex; flex-direction:column; justify-content:center; color:var(--mac-text); }
+  .lefty h1 { margin:0; font-size:56px; line-height:70px; font-weight:400; letter-spacing:-1.5px; }
+  .lefty h1 b { font-weight:800; }
+  .lefty .one { margin-top:22px; font-size:21px; line-height:30px; color:var(--mac-dim); }
+  .lefty .big { margin-top:44px; font-size:64px; line-height:72px; font-weight:800; letter-spacing:-1.5px; color:#A86A08; }
+  .lefty .cap { margin-top:10px; font-size:17px; line-height:24px; color:var(--mac-dim); }
+  .play { display:inline-flex; align-items:center; gap:10px; margin-top:34px; padding:10px 18px 10px 14px; border-radius:999px; background:#16171A; color:#fff; font-size:16px; font-weight:600; width:max-content; }
+  .play .tri { width:0; height:0; border-left:13px solid #fff; border-top:8px solid transparent; border-bottom:8px solid transparent; margin-left:4px; }
+  .r { position:absolute; right:150px; top:0; bottom:0; display:flex; align-items:center; }
+</style>
+</head><body>
+<div class="canvas poster app-foldagent desk-accent">
+  <div class="lefty">
+    <h1>폰에 Claude Code를<br><b>옮겼다.</b></h1>
+    <div class="one">말하면 폰이 스스로 앱을 열고, 누르고, 답한다.</div>
+    <div class="big">5단계 · 15초</div>
+    <div class="cap">설정에서 잔량을 읽기까지</div>
+    <div class="play"><span class="tri"></span>홍보 영상 · 69초</div>
+  </div>
+  <div class="r">
+    <div class="fold-cover" style="--zoom:.86">
+      <div class="screen">
+        <div class="status-bar" data-time="7:42"></div>
+        <div class="fake-app" style="top:32px">
+          <div class="fa-head"><i data-icon="arrow-left"></i>배터리</div>
+          <div class="fa-big">93%</div>
+          <div class="fa-row"><div class="s">남은 시간 약 1일 4시간</div></div>
+          <div class="fa-row"><div class="t">절전 모드</div><div class="s">꺼짐</div></div>
+          <div class="fa-row"><div class="t">배터리 보호</div><div class="s">최대 85%</div></div>
+          <div class="fa-row"><div class="t">앱별 사용량</div><div class="s">지난 7일</div></div>
+        </div>
+        <div class="overlay-panel run-panel" style="bottom:40px">
+          <div class="rp-head"><img data-app="foldagent" alt=""><span>폴드 에이전트 · 5단계 · 15초</span></div>
+          <div class="row"><span class="dot ok"></span><span class="rp-line">배터리는 93%예요.</span></div>
+          <div class="rp-btns"><span class="btn"><i data-icon="stop"></i>정지</span><span class="btn"><i data-icon="message"></i>대화방</span></div>
+        </div>
+        <div class="nav-handle"></div>
+      </div>
+    </div>
+  </div>
+</div>
+</body></html>
