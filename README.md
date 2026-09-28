@@ -174,9 +174,9 @@ Claude Code 와 함께 사흘(2026-09-26 ~ 28) 동안 만들었습니다. 규모
 <!-- VIDEO:START -->
 ### 홍보 영상
 
-[![홍보 영상 (가로 16:9, 69초) — 누르면 재생 화면으로 갑니다](docs/images/video-poster.png)](docs/video/promo_16x9.mp4)
+[![홍보 영상 (가로 16:9, 70초) — 누르면 재생 화면으로 갑니다](docs/images/video-poster.png)](docs/video/promo_16x9.mp4)
 
-▶ [가로 16:9 · 69초](docs/video/promo_16x9.mp4) · ▶ [세로 9:16 · 69초](docs/video/promo_9x16.mp4) — 영상 속 화면은 설명용 목업입니다.
+▶ [가로 16:9 · 70초](docs/video/promo_16x9.mp4) · ▶ [세로 9:16 · 66초](docs/video/promo_9x16.mp4) — 영상 속 화면은 설명용 목업입니다.
 <!-- VIDEO:END -->
 
 ## 관련 프로젝트
